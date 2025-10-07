@@ -77,6 +77,8 @@ nav:
     - Présentation générale: besoins/index.md
     - Glossaire: besoins/glossaire.md
     - Exigences: besoins/exigences.md
+    - Besoins non fonctionnels: besoins/besoins-non-fonctionnels.md
+    - Besoins matériels, stockage et intégration: besoins/besoins-materiels-integration.md
     - Risques: besoins/risques.md
     - Cas d'utilisation: besoins/cas-utilisation.md
     - Flux principaux: besoins/flux-principaux.md
