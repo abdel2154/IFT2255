@@ -23,3 +23,14 @@ Ce glossaire définit les termes importants utilisés dans le projet, en particu
 | Résultats académiques | Statistiques agrégées sur un cours (moyenne, nombre d’inscrits, taux d’échec) fournies de manière confidentielle. |
 | TGDE | Technicien ou service responsable de la gestion des diplômes et de l’orientation académique de l’étudiant. |
 | Bot Discord | Programme automatisé collectant et centralisant les avis étudiants depuis Discord. |
+| Éligibilité | État indiquant si un étudiant répond aux conditions nécessaires pour s’inscrire à un cours donné (prérequis, cycle, statut). |
+| Diplomation | Processus de validation du cheminement d’un étudiant menant à l’obtention d’un diplôme ; inclut la vérification des exigences de crédits et catégories de cours. |
+| Profil utilisateur | Ensemble des informations personnelles et académiques d’un étudiant (cycle, programme, préférences, cours réussis) servant à personnaliser les recommandations. |
+| Interface web | Application web principale permettant l’accès à la plateforme depuis un navigateur ; elle communique avec l’API REST du système. |
+| API REST | Interface de communication exposant les fonctionnalités principales (recherche, comparaison, simulation, avis) pour la plateforme et les applications externes. |
+| Cas d’utilisation (CU) | Description d’une interaction entre un acteur et le système menant à un résultat concret pour l’utilisateur. |
+| Exigence fonctionnelle | Fonction spécifique que le système doit offrir (ex. rechercher un cours, créer une simulation). |
+| Exigence non fonctionnelle | Caractéristique de qualité du système (ex. performance, sécurité, accessibilité). |
+| Anonymisation | Processus de suppression ou de masquage des données personnelles pour protéger l’identité des étudiants dans les avis. |
+| Agrégation | Regroupement et traitement statistique de données individuelles (ex. notes ou avis) pour produire des indicateurs globaux sans données nominatives. |
+
