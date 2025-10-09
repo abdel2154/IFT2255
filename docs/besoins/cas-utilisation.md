@@ -82,7 +82,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Préconditions** : L’étudiant est connecté et a un profil existant.  
 **Postconditions** : Le tableau de bord est affiché avec les informations disponibles et interactives. 
 **Déclencheur** : L’étudiant clique sur le bouton ou le menu « Tableau de bord » après s’être connecté.    
-**Dépendances** :  
+**Dépendances** :  CU1 / CU7 : Profil étudiant et favoris stockés dans la base de données,API Planifium : récupération des données officielles des cours ,CU9 / CU11 : consultation et recherche de cours (si le tableau de bord affiche des liens ou résumés de cours)  
 **But** : Permettre à l’étudiant de visualiser un résumé personnalisé de ses cours, favoris, et informations clés pour faciliter la prise de décision.
 
 ---
@@ -92,7 +92,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Préconditions** : L’étudiant est connecté et a accès aux cours à comparer.  
 **Postconditions** : L’étudiant visualise un tableau comparatif à jour des cours sélectionnés.  
 **Déclencheur** : L’étudiant sélectionne l’option « Comparer cours » dans le menu ou depuis la page d’un cours.   
-**Dépendances** :  
+**Dépendances** : CU5 : le tableau de bord peut servir de point de départ pour la sélection de cours, CU11 : fiches de cours pour récupérer les informations détaillées, CU10 : résultats académiques des cours à comparer, CU8 : avis étudiants (optionnel, si affiché dans la comparaison)  
 **But** : Permettre à l’étudiant de comparer plusieurs cours pour évaluer la charge de travail et faciliter son choix.
 
 ---
@@ -122,7 +122,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Préconditions** : L’étudiant est connecté et a un profil existant.  
 **Postconditions** : La liste des cours correspondant à la recherche est affichée avec indication d’éligibilité.  
 **Déclencheur** : L’étudiant saisit un code, titre ou mot-clé dans la barre de recherche et appuie sur « Rechercher ».    
-**Dépendances** :  
+**Dépendances** :  API Planifium : accès aux informations des cours, CU10 : pour afficher les résultats académiques d’un cours trouvé, CU11 : pour accéder à la fiche détaillée d’un cours,Base de données : vérifier l’éligibilité de l’étudiant pour certains cours
 **But** : Permettre à l’étudiant de trouver des cours selon différents critères (code, titre, mots-clés) et vérifier son éligibilité.  
 
 ---
@@ -132,7 +132,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Préconditions** :  L’étudiant est connecté et consulte la fiche d’un cours existant.  
 **Postconditions** : Les résultats académiques disponibles du cours sont affichés.  
 **Déclencheur** : L’étudiant clique sur le bouton ou le lien « Résultats académiques » depuis la fiche d’un cours.  
-**Dépendances** :  
+**Dépendances** :  CU11 : fiche de cours contenant le lien ou bouton pour afficher les résultats,API Planifium : pour récupérer les statistiques globales du cours, Base de données : stockage et accès aux résultats agrégés (si nécessaire)  
 **But** : Permettre à l’étudiant de consulter les statistiques agrégées d’un cours pour mieux évaluer la charge et le niveau de difficulté.  
 
 ---
