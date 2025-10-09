@@ -83,7 +83,29 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Postconditions** : Le tableau de bord est affiché avec les informations disponibles et interactives. 
 **Déclencheur** : L’étudiant clique sur le bouton ou le menu « Tableau de bord » après s’être connecté.    
 **Dépendances** :  CU1 / CU7 : Profil étudiant et favoris stockés dans la base de données,API Planifium : récupération des données officielles des cours ,CU9 / CU11 : consultation et recherche de cours (si le tableau de bord affiche des liens ou résumés de cours)  
-**But** : Permettre à l’étudiant de visualiser un résumé personnalisé de ses cours, favoris, et informations clés pour faciliter la prise de décision.
+**But** : Permettre à l’étudiant de visualiser un résumé personnalisé de ses cours, favoris, et informations clés pour faciliter la prise de décision.  
+
+**Scénario principal:**  
+1) L'étudiant accède à la page d'accueil après sa connexion.  
+2) Le système vérifie les informations de connexion et le type de profil.  
+3) Le système récupère les informations du profil depuis la base de données.    
+4) Le système interroge l’API Planifium pour mettre à jour les données des cours suivis et favoris.    
+5) Le système récupère les statistiques académiques et avis liés aux cours de l’étudiant.  
+6) Le système compile toutes les données (favoris, suggestions, statistiques).  
+7) Le système affiche le tableau de bord personnalisé à l’écran.  
+8) L’étudiant consulte et interagit avec les éléments (ex. accéder à la fiche d’un cours, modifier un favori).  
+
+**Scénario alternatif**  
+3a. Le profil de l’étudiant n’existe pas dans la base de données.  
+ 3a.1. Le système affiche un message invitant à créer un profil.  
+ 3a.2. L’étudiant choisit de créer son profil.  
+ 3a.3. Le système redirige vers le CU7 (Créer profil).  
+ 3a.4. Une fois le profil créé, le scénario principal reprend à l’étape 4.  
+
+7a. Une erreur interne empêche l’affichage du tableau.  
+ 7a.1. Le système affiche un message d’erreur générique.  
+ 7a.2. Le système envoie un rapport automatique à l’équipe technique.  
+ 7a.3. L’étudiant peut réessayer ou se déconnecter.  
 
 ---
 ### CU06 - Comparer Cours
@@ -98,22 +120,22 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 ---
 ### CU07 - xxx
 
-**Acteurs** : 
-**Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Acteurs** :  
+**Préconditions** :    
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 ### CU08 - xxx
 
-**Acteurs** : 
-**Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Acteurs** :   
+**Préconditions** :    
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 ### CU09 - Rechercher cours
@@ -138,12 +160,12 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 ---
 ### CU11 - xxx
 
-**Acteurs** : 
-**Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Acteurs** :  
+**Préconditions** :    
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 
