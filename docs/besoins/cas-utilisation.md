@@ -39,32 +39,32 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 
 ### CU01 - xxx
 
-**Acteurs** : 
+**Acteurs** :  
 **Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 ### CU02 - xxx
 
-**Acteurs** : 
-**Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Acteurs** :   
+**Préconditions** :    
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 ### CU03 - xxx
 
-**Acteurs** : 
-**Préconditions** :  
-**Postconditions** :
-**Déclencheur** : 
-**Dépendances** : 
-**But** : 
+**Acteurs** :   
+**Préconditions** :    
+**Postconditions** :  
+**Déclencheur** :  
+**Dépendances** :  
+**But** :  
 
 ---
 ### CU04 - Gérer ses favoris

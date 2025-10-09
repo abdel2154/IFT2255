@@ -11,3 +11,9 @@ title: Conception - Diagrammes UML
 ## Diagrammes de séquence
 
 - Exécution pas à pas d’un scénario type
+
+## Diagrammes de cas d'utilisations
+
+![Diagramme du système](../images/Diagramme_CUs.png)
+
+
