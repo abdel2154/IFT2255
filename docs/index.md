@@ -14,7 +14,7 @@ title: Vue d'ensemble
 
 ## Équipe
 
-- **`M1`:** Membre 1 (matricule) #nom-utilisateur
+- **`M1`:** Abdelmouhcine Messaad (20287581) #nom-utilisateur
 - **`M2`:** Membre 2 (matricule) #nom-utilisateur
 - **`M3`:** Membre 3 (matricule) #nom-utilisateur  
 - **`M4`:** Membre 4 (matricule) #nom-utilisateur

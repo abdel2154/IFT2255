@@ -18,14 +18,55 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 
 | ID | Nom | Acteurs principaux | Description |
 |----|-----|---------------------|-------------|
-| CU04 | Gérer ses favoris | Utilisateur | L’utilisateur ajoute ou retire des cours à sa liste de favoris pour les retrouver plus facilement. |
+| CU01 |...|...|...|
+| CU02 |...|...|...|
+| CU03 |...|...|...|
+| CU04 |Gérer ses favoris| Utilisateur | L’utilisateur ajoute ou retire des cours à sa liste de favoris pour les retrouver plus facilement. |
+| CU05 |Afficher tableau de bord |Étudiant (principal), Base de données (secondaire), API Planifium (secondaire)|L’étudiant voit rapidement l’état de son parcours et ses cours favoris pour mieux planifier son prochain semestre.|
+| CU06 |Comparer cours| Étudiant (principal), Base de données (secondaire) API Planifium (secondaire) | L’étudiant peut comparer plusieurs options côte à côte pour choisir le cours qui correspond le mieux à ses objectifs et à sa disponibilité.|
+| CU07 |...|...|...|
+| CU08 |...|...|...|
+| CU09 |Rechercher cours|Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)|L’étudiant peut rapidement identifier les cours pertinents à son profil et savoir s’il peut s’y inscrire.|
+| CU10 |Afficher résultats académiques d'un cours|Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)|L’étudiant obtient des repères sur la difficulté et la réussite des cours pour décider lesquels s’intègrent le mieux à son parcours.|
+| CU11 |...|...|...|
 | CU12 | Créer une simulation d’horaire | Utilisateur | L’utilisateur crée une simulation d’horaire à partir de cours choisis afin de visualiser la charge de travail et la compatibilité des plages horaires. |
-| CU13 | Voir comment un cours s’inscrit dans les exigences de diplomation | Utilisateur | L’utilisateur consulte la contribution d’un cours à la diplomation selon son programme (catégories de crédits, exigences restantes, etc.). |
+| CU13 | Consulter la place d'un cours dans le programme | Utilisateur | L’utilisateur consulte la contribution d’un cours à la diplomation selon son programme (catégories de crédits, exigences restantes, etc.). |
 
 ---
 
 ## Détail
 
+
+### CU01 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
+
+---
+### CU02 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
+
+---
+### CU03 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
+
+---
 ### CU04 - Gérer ses favoris
 
 **Acteurs** : Utilisateur (principal)  
@@ -34,6 +75,75 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Déclencheur** : L’utilisateur clique sur l’icône « Favori » ou accède à sa liste de favoris.  
 **Dépendances** : Système de profil utilisateur et base de données des cours.  
 **But** : Permettre à l’utilisateur de conserver une liste personnalisée de cours qu’il souhaite suivre, comparer ou évaluer plus tard.
+
+---
+### CU05 - Affficher tableau de bord
+**Acteurs** : Étudiant (principal), Base de données (secondaire), API Planifium (secondaire)    
+**Préconditions** : L’étudiant est connecté et a un profil existant.  
+**Postconditions** : Le tableau de bord est affiché avec les informations disponibles et interactives. 
+**Déclencheur** : L’étudiant clique sur le bouton ou le menu « Tableau de bord » après s’être connecté.    
+**Dépendances** :  
+**But** : Permettre à l’étudiant de visualiser un résumé personnalisé de ses cours, favoris, et informations clés pour faciliter la prise de décision.
+
+---
+### CU06 - Comparer Cours
+
+**Acteurs** : Étudiant (principal), Base de données (secondaire), API Planifium (secondaire)  
+**Préconditions** : L’étudiant est connecté et a accès aux cours à comparer.  
+**Postconditions** : L’étudiant visualise un tableau comparatif à jour des cours sélectionnés.  
+**Déclencheur** : L’étudiant sélectionne l’option « Comparer cours » dans le menu ou depuis la page d’un cours.   
+**Dépendances** :  
+**But** : Permettre à l’étudiant de comparer plusieurs cours pour évaluer la charge de travail et faciliter son choix.
+
+---
+### CU07 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
+
+---
+### CU08 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
+
+---
+### CU09 - Rechercher cours
+
+**Acteurs** : Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)  
+**Préconditions** : L’étudiant est connecté et a un profil existant.  
+**Postconditions** : La liste des cours correspondant à la recherche est affichée avec indication d’éligibilité.  
+**Déclencheur** : L’étudiant saisit un code, titre ou mot-clé dans la barre de recherche et appuie sur « Rechercher ».    
+**Dépendances** :  
+**But** : Permettre à l’étudiant de trouver des cours selon différents critères (code, titre, mots-clés) et vérifier son éligibilité.  
+
+---
+### CU10 - Afficher résultats académiques d’un cours
+
+**Acteurs** : Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)  
+**Préconditions** :  L’étudiant est connecté et consulte la fiche d’un cours existant.  
+**Postconditions** : Les résultats académiques disponibles du cours sont affichés.  
+**Déclencheur** : L’étudiant clique sur le bouton ou le lien « Résultats académiques » depuis la fiche d’un cours.  
+**Dépendances** :  
+**But** : Permettre à l’étudiant de consulter les statistiques agrégées d’un cours pour mieux évaluer la charge et le niveau de difficulté.  
+
+---
+### CU11 - xxx
+
+**Acteurs** : 
+**Préconditions** :  
+**Postconditions** :
+**Déclencheur** : 
+**Dépendances** : 
+**But** : 
 
 ---
 
@@ -48,7 +158,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 
 ---
 
-### CU13 - Voir comment un cours s’inscrit dans les exigences de diplomation
+### CU13 - Consulter la place d'un cours dans le programme
 
 **Acteurs** : Utilisateur (principal)  
 **Préconditions** : L’utilisateur a défini son programme ou son profil académique (ex. Baccalauréat en informatique).  
