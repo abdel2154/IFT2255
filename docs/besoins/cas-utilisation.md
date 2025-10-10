@@ -18,9 +18,9 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 
 | ID | Nom                                             | Acteurs principaux                                                             | Description                                                                                                                                            |
 |----|-------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CU01 | Exporter des données                            | Étudiant                                                                       | L’étudiant sélectionne des cours et génère un document (PDF, CSV, ou autre) regroupant leurs informations essentielles.                                |
+| CU01 | Exporter des données                            | Étudiant (principal), Base de données (secondaire), API Planifium (secondaire) | L’étudiant sélectionne des cours et génère un document (PDF, CSV, ou autre) regroupant leurs informations essentielles.                                |
 | CU02 | Modérer les avis étudiants                      | Modérateur                                                                     | Le modérateur valide ou rejette les avis soumis avant publication.                                                                                     |
-| CU03 | Consulter un profil                             | Étudiant                                                                       | Un étudiant peut consulter le profil public d’un autre contributeur                                                                                    |
+| CU03 | Consulter un profil                             | Étudiant (principal), Base de données (secondaire)                                                                       | Un étudiant peut consulter le profil public d’un autre contributeur                                                                                    |
 | CU04 | Gérer ses favoris                               | Utilisateur                                                                    | L’utilisateur ajoute ou retire des cours à sa liste de favoris pour les retrouver plus facilement.                                                     |
 | CU05 | Afficher tableau de bord                        | Étudiant (principal), Base de données (secondaire), API Planifium (secondaire) | L’étudiant voit rapidement l’état de son parcours et ses cours favoris pour mieux planifier son prochain semestre.                                     |
 | CU06 | Comparer cours                                  | Étudiant (principal), Base de données (secondaire) API Planifium (secondaire)  | L’étudiant peut comparer plusieurs options côte à côte pour choisir le cours qui correspond le mieux à ses objectifs et à sa disponibilité.            |
@@ -39,12 +39,12 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 
 ### CU01 - Exporter des données
 
-**Acteurs** : Étudiant
-**Préconditions** :  
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
+**Acteurs** : Étudiant (principal), Base de données (secondaire), API Planifium (secondaire).  
+**Préconditions** : L'étudiant a un compte et y est connecté. L'étudiant a sélectionné des cours.  
+**Postconditions** : L'étudiant a téléchargé un document contenant les données désirées.  
+**Déclencheur** : L'étudiant clique sur le bouton "Exporter" pendant que les cours désirés sont sélectionnés.  
+**Dépendances** : CU5 : le tableau de bord peut servir de point de départ pour la sélection des cours, CU11 : fiches de cours pour récupérer les informations détaillées, CU10 : résultats académiques des cours à comparer, CU8 : avis étudiants.  
+**But** : Consulter les données principales des cours pertinents pour l'étudiant hors-ligne.  
 
 ---
 ### CU02 - Modérer les avis étudiants
@@ -86,14 +86,14 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
  6a.1.3. L'avis reste dans son état précédent.  
 
 ---
-### CU03 - xxx
+### CU03 - Consulter un profil étudiant
 
-**Acteurs** :   
-**Préconditions** :    
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
+**Acteurs** : Étudiant (Principal), Base de données (Secondaire)
+**Préconditions** : L'étudiant qui fait la recherche et l'étudiant recherché ont leurs profils respectifs.
+**Postconditions** : Le profil de l'étudiant recherché apparaît à l'étudiant qui fait la recherche.
+**Déclencheur** : L'étudiant qui fait la recherche clique sur le profil de l'étudiant recherché dans une liste de profils dans le module de recherche de profils.
+**Dépendances** : CU7: les deux étudiants doivent avoir créé des profils.
+**But** : S'inspirer des choix d'autres étudiants afin d'éclairer ses propres décisions. Contextualiser les avis d'un étudiant donné.
 
 ---
 ### CU04 - Gérer ses favoris
@@ -203,14 +203,14 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **But** : Permettre à l’étudiant de consulter les statistiques agrégées d’un cours pour mieux évaluer la charge et le niveau de difficulté.  
 
 ---
-### CU11 - xxx
+### CU11 - Consulter la fiche d’un cours
 
-**Acteurs** :  
-**Préconditions** :    
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
+**Acteurs** : Étudiant (principal), Base de données (secondaire) API Planifium (secondaire)
+**Préconditions** : L'étudiant a un profil et y est connecté. La fiche du cours qu'il recherche existe.
+**Postconditions** : Les données détaillées du cours recherché sont affichées.
+**Déclencheur** : L'étudiant clique sur le cours désiré dans la liste des cours correspondant à sa recherche dans le module de recherche de cours.
+**Dépendances** : CU7: l'étudiant doit avoir un profil. CU9: l'étudiant doit pouvoir recherche le cours.
+**But** : Accéder aux données pertinentes d'un cours donné afin d'éclairer les décisions de l'étudiant.
 
 ---
 
