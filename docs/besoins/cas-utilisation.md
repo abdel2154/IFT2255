@@ -56,6 +56,34 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Dépendances** : Flux de données depuis le bot Discord. Le CU "Afficher les avis étudiants" (CU08) dépend de ce CU.  
 **But** : S'assurer que les avis soumis respectent les règles de la plateforme. 
 
+**Scénario principal:**  
+1. Le système notifie le modérateur qu'un ou plusieurs avis sont en attente de modération (via un tableau de bord admin).  
+2. Le modérateur accède à l'interface de modération.  
+3. Le système présente une liste d'avis en attente, chacun affichant le contenu du commentaire, la difficulté perçue, la charge de travail estimée, le cours concerné et l'identifiant anonyme de l'étudiant.  
+4. Le modérateur sélectionne un avis dans la liste pour l'examiner en détail.  
+5. Le modérateur évalue l'avis par rapport à une liste de critères (pertinence, langage, spam, etc.).  
+6. Le modérateur prend une décision :  
+    * **6a. Approuver l'avis :**  
+      6a.1. Le modérateur clique sur le bouton "Approuver".  
+      6a.2. Le système enregistre l'avis comme "approuvé" dans la base de données.  
+      6a.3. L'avis devient visible dans la fiche du cours concerné (CU 8).  
+      6a.4. Le système retire l'avis de la file d'attente de modération.  
+    * **6b. Rejeter l'avis :**  
+      6b.1. Le modérateur clique sur le bouton "Rejeter".  
+      6b.2. Le système demande une raison pour le rejet (optionnel, mais recommandé).  
+      6b.3. Le modérateur sélectionne ou saisit une raison (ex: "langage inapproprié").  
+      6b.4. Le système enregistre l'avis comme "rejeté" et l'archive avec la raison.  
+      6b.5. Le système retire l'avis de la file d'attente de modération.  
+
+**Scénario alternatif:**  
+5a. Le modérateur décide de mettre en pause et de revenir plus tard.  
+ 5a.1. L'avis reste dans la file d'attente "en cours de modération".  
+ 5a.2. Le modérateur peut reprendre la modération plus tard.  
+
+6a.1. Erreur lors de l'approbation.  
+ 6a.1.1. Le système ne peut pas mettre à jour la base de données.  
+ 6a.1.2. Un message d'erreur est affiché.  
+ 6a.1.3. L'avis reste dans son état précédent.  
 ---
 ### CU03 - xxx
 
