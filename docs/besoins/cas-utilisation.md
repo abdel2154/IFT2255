@@ -19,7 +19,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 | ID | Nom | Acteurs principaux | Description |
 |----|-----|---------------------|-------------|
 | CU01 |...|...|...|
-| CU02 |...|...|...|
+| CU02 | Modérer les avis étudiants | Modérateur | Le modérateur valide ou rejette les avis soumis avant publication. |
 | CU03 |...|...|...|
 | CU04 |Gérer ses favoris| Utilisateur | L’utilisateur ajoute ou retire des cours à sa liste de favoris pour les retrouver plus facilement. |
 | CU05 |Afficher tableau de bord |Étudiant (principal), Base de données (secondaire), API Planifium (secondaire)|L’étudiant voit rapidement l’état de son parcours et ses cours favoris pour mieux planifier son prochain semestre.|
@@ -47,14 +47,14 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **But** :  
 
 ---
-### CU02 - xxx
+### CU02 - Modérer les avis étudiants
 
-**Acteurs** :   
-**Préconditions** :    
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
+**Acteurs** : Modérateur (Administrateur) (principal), Système (Base de données) (secondaire)  
+**Préconditions** : Le modérateur est authentifié et connecté. Le modérateur dispose des permissions d'administration. Il existe une file d'attente d'avis en attente de modération.  
+**Postconditions** : L'avis est soit approuvé (et devient visible), soit rejeté (et est supprimé ou archivé). La base de données est mise à jour.  
+**Déclencheur** : Un nouvel avis est soumis via le bot Discord OU un utilisateur signale un avis déjà publié.  
+**Dépendances** : Flux de données depuis le bot Discord. Le CU "Afficher les avis étudiants" (CU08) dépend de ce CU.  
+**But** : S'assurer que les avis soumis respectent les règles de la plateforme. 
 
 ---
 ### CU03 - xxx
