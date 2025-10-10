@@ -15,7 +15,7 @@ title: Vue d'ensemble
 ## Équipe
 
 - **`M1`:** Abdelmouhcine Messaad (20287581) #nom-utilisateur
-- **`M2`:** Membre 2 (matricule) #nom-utilisateur
+- **`M2`:** Bencheikh El Atmani Ayoub (20237691) #yubito04
 - **`M3`:** Membre 3 (matricule) #nom-utilisateur  
 - **`M4`:** Membre 4 (matricule) #nom-utilisateur
 

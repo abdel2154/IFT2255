@@ -147,6 +147,22 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Dépendances** :  API Planifium : accès aux informations des cours, CU10 : pour afficher les résultats académiques d’un cours trouvé, CU11 : pour accéder à la fiche détaillée d’un cours,Base de données : vérifier l’éligibilité de l’étudiant pour certains cours
 **But** : Permettre à l’étudiant de trouver des cours selon différents critères (code, titre, mots-clés) et vérifier son éligibilité.  
 
+**Scénario principal: **  
+1) L’étudiant ouvre la section « Exigences de diplomation ».  
+2) Il choisit un cours à évaluer.  
+3) Le système vérifie la correspondance entre le cours et les catégories du programme.  
+4) Le système indique si le cours est obligatoire, à option ou hors programme.  
+5) L’étudiant consulte les informations affichées et décide s’il souhaite l’ajouter à sa planification.  
+
+**Scénario alternatif:**  
+2a. Le cours sélectionné ne fait pas partie du programme.  
+ 2a.1. Le système affiche un message : « Ce cours n’appartient pas à votre programme. »  
+ 2a.2. Le système propose de vérifier si le cours peut être reconnu comme équivalent ou option libre.  
+ 2a.3. L’étudiant clique sur « Vérifier les équivalences ».  
+ 2a.4. Le système affiche la liste des cours similaires ou équivalents.  
+ 2a.5. L’étudiant choisit un cours équivalent et relance la vérification.
+
+ 
 ---
 ### CU10 - Afficher résultats académiques d’un cours
 

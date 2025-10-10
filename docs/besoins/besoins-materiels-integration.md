@@ -1,47 +1,50 @@
-# Besoins materiels, solution de stockage et d'integration
+# Besoins matériels, solution de stockage et d’intégration (version simple)
 
-Objectif : préciser l'infrastructure (materiel), la maniere dont les donnees sont stockees et sauvegardees (stockage), ainsi que la facon dont le systeme communique avec les services externes (integration).
+Objectif : expliquer sur quelle machine tourne le site, où sont gardées les données, et comment on se connecte aux sources externes (Planifium, Discord, résultats).
 
-## 1) Besoins materiels
+## 1) Besoins matériels (où tourne le site)
+- **Machine serveur :** une machine virtuelle avec Linux.
+- **Taille conseillée :** 2 “cœurs” de processeur, 4 Go de mémoire, 20 Go de disque.
+- **Connexion :** accès internet stable et site accessible en https (sécurisé).
+- **Utilisateurs :** un simple navigateur web suffit (Chrome, Firefox, Edge, Safari).
+- **But :** supporter sans problème les consultations pendant les périodes d’inscription.
 
-Serveur web hebergeant une API REST et une base de donnees relationnelle. Deploiement simple sur VM Linux.
+**Vérification rapide :**
+- Le site répond en https (pas en http simple).
+- Un petit test montre que le site reste fluide avec de nombreux utilisateurs connectés en même temps (la plupart des pages en ≤ 2 s).
 
-- Systeme : Ubuntu 22.04 (VM).
-- Configuration minimale : 2 vCPU, 4 Go RAM, 20 Go disque.
-- Reseau : acces sortant stable vers les APIs externes, port HTTPS expose.
-- Clients : navigateurs modernes (Chrome, Firefox, Edge, Safari).
-- Environnements : dev (local), test/CI (automatises), prod (etudiants).
-- Charge cible : 100–200 requetes/min sans depasser p90 > 2 s.
+## 2) Solution de stockage (où sont les données)
+- **Base de données :** on utilise PostgreSQL (base relationnelle classique).
+- **Ce qu’on stocke :**
+  - **Cours** (code, titre, crédits, etc.)
+  - **Résultats** (moyenne, nombre d’inscrits, échecs, session)
+  - **Avis** (difficulté perçue, charge estimée, commentaire)
+  - **Profils** (préférences générales pour personnaliser l’affichage)
+- **Fichiers entrants :**
+  - **CSV** pour les résultats (fournis par session)
+  - **JSON** pour les avis (provenant de Discord)
+  - **API** Planifium pour le catalogue et les horaires
+- **Sauvegardes :** une copie de la base est faite chaque jour et on sait la remettre en place rapidement si besoin.
+- **Confidentialité :** on n’enregistre pas d’informations qui identifient directement un étudiant dans les avis.
 
-**Criteres d'acceptation**
-- Deploiement OK sur VM aux specs minimales.
-- Tout le trafic est en HTTPS (aucune requete HTTP en clair).
-- Test de charge 10 min a 200 req/min : p90 <= 2 s, p99 <= 4 s, erreurs < 1 %.
+**Vérification rapide :**
+- On peut importer un gros fichier CSV sans erreur en un temps raisonnable.
+- On peut restaurer une sauvegarde sans difficulté (testée régulièrement).
+- Les avis n’affichent des statistiques que s’il y a au moins **5 avis**.
 
----
+## 3) Solution d’intégration (comment on se connecte aux autres)
+- **Planifium (officiel) :** on lit les informations de cours et d’horaires via leur API, puis on les met en forme pour notre base.
+- **Discord (avis étudiants) :** un petit robot récupère les avis au format JSON, on vérifie que le contenu est correct, puis on les enregistre.
+- **Résultats (CSV) :** on charge les fichiers fournis, on vérifie qu’ils sont bien formés, puis on met à jour la base.
 
-## 2) Solution de stockage
+**Règles de bon fonctionnement :**
+- Si une source externe ne répond pas (ex. Planifium), on affiche les **dernières données connues** et on prévient l’utilisateur.
+- On limite le nombre d’appels vers chaque service pour éviter les blocages.
+- On garde des traces (journaux) de ce qui se passe : temps de réponse, erreurs, import réussi ou non.
 
-Les donnees seront conservees dans une base **PostgreSQL**, structuree autour des tables `cours`, `resultats`, `avis`, `profils`.
+**Vérification rapide :**
+- Quand Planifium est indisponible, le site continue d’afficher les infos déjà enregistrées et montre un message d’avertissement.
+- Si un fichier d’avis ou de résultats est invalide, il est refusé et on enregistre une explication de l’erreur.
+- La description de notre API (documentation) est accessible pour ceux qui veulent s’y connecter.
 
-### Modele relationnel (extrait)
-- `cours(id, code, titre, credits, departement, cycle)`
-- `resultats(id, cours_id, trimestre, moyenne, inscrits, echec)`
-- `avis(id, cours_id, difficulte, charge, commentaire, ts, source='discord')`
-- `profils(id, prefs_theorie_pratique, centres_interet, cycle)`
 
-### Regles et performances
-- Integrite : cles etrangeres (FK), NOT NULL, controles de domaine (ex. difficulte dans [1..5]).
-- Index : `cours(code)`, `resultats(cours_id,trimestre)`, `avis(cours_id,ts)`.
-- Formats d'entree :
-  - Resultats academiques : **CSV** (import planifie).
-  - Avis etudiants (Discord) : **JSON** (ingestion via webhook/worker).
-  - Planifium : **API REST** (normalisation + cache avant persistance).
-- Sauvegardes : `pg_dump` quotidien, retention 30 jours, procedure de restauration documentee.
-- Confidentialite : minimisation des donnees (aucun identifiant personnel dans `avis`), compte DB lecture seule pour l'API publique.
-- Qualite : agrégation d'avis affichee seulement si **n >= 5** (sinon message "echantillon insuffisant").
-
-**Criteres d'acceptation**
-- Import CSV 10k lignes < 60 s, lignes rejetees journalisees.
-- Test de restauration reussi (< 10 min en dev).
-- Aucune donnee nominative dans `avis`; regle n >= 5 appliquee en UI.
