@@ -14,27 +14,24 @@ title: Vue d'ensemble
 
 ## Équipe
 
-- **`M1`:** Abdelmouhcine Messaad (20287581) #nom-utilisateur
+- **`M1`:** Membre 1 (matricule) #nom-utilisateur
 - **`M2`:** Bencheikh El Atmani Ayoub (20237691) #yubito04
-- **`M3`:** Membre 3 (matricule) #nom-utilisateur  
+- **`M3`:** Abdelmouhcine Messaad (20287581) #abdel_kb99 
 - **`M4`:** Membre 4 (matricule) #nom-utilisateur
 
 ## Description du projet
 
 ## Échéancier
 
-| Taches                        | Terminé le    | Statut      | Responsable  |
-|-------------------------------|---------------|-------------|--------------|
-| Ouverture de projet           | 12 septembre  | ✅ Terminé  | `M1`         |
-| Description du domaine        | 19 septembre  | 🔄 En cours | `M1` `M2`    |
-| Identification des acteurs    | 19 septembre  | 🔄 En cours | `M2` `M3`    |
-| Glossaire                     | 21 septembre  | ⏳ À venir  | `M3`         |
-| Exigences Fonct et Non-Fonct  | 26 septembre  | ⏳ À venir  | `M1` `M4`    |
-| Évaluation des risques        | 26 septembre  | ⏳ À venir  | `M2`         |
-| Personas                      | 29 septembre  | ⏳ À venir  | `M1`         |
-| Cas d'utilisation             | 3 octobre     | ⏳ À venir  | `M3`         |
-| Diagramme d'activités         | 6 octobre     | ⏳ À venir  | `M4`         |
-| Modèle C4                     | 6 octobre     | ⏳ À venir  | `M3`         |
-| Prototype fonctionnel (bonus) | 10 octobre    | ⏳ À venir  | `M4`         |
-| Rapport                       | 10 octobre    | ⏳ À venir  | `M1`         |
-
+| Tâches                                        | Terminé le   | Statut    | Responsable         |
+| --------------------------------------------- | ------------ | --------- | ------------------- |
+| Réunion d’équipe / Répartition des tâches     | 30 septembre | ✅ Terminé | `M1` `M2` `M3` `M4` |
+| Description du domaine, hypothèses, glossaire | 2 octobre    | ✅ Terminé | `M1` `M2` `M3` `M4` |
+| Évaluation des risques + solutions            | 4 octobre    | ✅ Terminé | `M1`                |
+| Besoins non fonctionnels et matériels         | 5 octobre    | ✅ Terminé | `M2`                |
+| Diagramme des cas d’utilisation               | 6 octobre    | ✅ Terminé | `M3`                |
+| Diagramme d’activités                         | 6 octobre    | ✅ Terminé | `M4`                |
+| Descriptions des cas d’utilisation (CU)       | 8 octobre    | ✅ Terminé | `M1` `M2` `M3` `M4` |
+| Scénarios liés aux CU                         | 9 octobre    | ✅ Terminé | `M2` `M3` `M4`      |
+| Modèle C4                                     | 9 octobre    | ✅ Terminé | `M1`                |
+| Relecture et mise en page finale              | 10 octobre   | ✅ Terminé | `M1` `M2` `M3` `M4` |
