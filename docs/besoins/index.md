@@ -35,31 +35,36 @@ Le système interagit avec l’API Planifium pour récupérer les données de co
 
 Le système repose sur plusieurs dépendances logicielles, techniques et organisationnelles essentielles à son fonctionnement :
 
-1. **Dépendance à l’API Planifium**  
+ **Dépendance à l’API Planifium**  
    - Fournit les informations officielles sur les cours (codes, crédits, horaires, pré/co-requis, structures de programmes).  
    - Toute modification ou indisponibilité de l’API peut limiter la précision des données affichées sur la plateforme.
 
-2. **Dépendance aux fichiers CSV de résultats académiques**  
+**Dépendance aux fichiers CSV de résultats académiques**  
    - Source de données agrégées (moyenne, taux d’échec, nombre d’inscrits).  
    - Ces fichiers doivent être régulièrement mis à jour pour garantir l’exactitude des statistiques présentées.
 
-3. **Dépendance au bot Discord (avis étudiants)**  
+
+ **Dépendance au bot Discord (avis étudiants)**  
    - Outil externe chargé de collecter et transmettre les avis étudiants au système.  
    - Le fonctionnement de la plateforme dépend du volume et de la fiabilité de ces avis, qui ne sont affichés qu’à partir du seuil **n ≥ 5**.
 
-4. **Dépendance à la base de données interne**  
+
+ **Dépendance à la base de données interne**  
    - Centralise et relie toutes les données issues des différentes sources (Planifium, CSV, Discord, profils).  
    - Une défaillance ou corruption des données pourrait impacter la cohérence du système.
 
-5. **Dépendance au profil utilisateur**  
+
+ **Dépendance au profil utilisateur**  
    - Les fonctions de personnalisation (recommandations, favoris, simulations) dépendent des informations renseignées dans le profil (programme, préférences, cheminement).  
    - Ces données doivent être protégées et synchronisées selon les exigences de confidentialité.
 
-6. **Dépendance à l’infrastructure d’hébergement**  
+
+ **Dépendance à l’infrastructure d’hébergement**  
    - Le système nécessite un hébergement web stable pour le frontend, l’API REST et la base de données.  
    - La disponibilité, la sécurité et les sauvegardes régulières sont indispensables à la fiabilité globale du service.
 
-7. **Dépendance aux règles institutionnelles**  
+
+ **Dépendance aux règles institutionnelles**  
    - Les données sur les programmes et les exigences de diplomation proviennent des structures officielles de l’Université de Montréal.  
    - Tout changement administratif (programme, cours obligatoires, crédits requis) doit être reflété dans la plateforme pour conserver la validité des recommandations.
 
