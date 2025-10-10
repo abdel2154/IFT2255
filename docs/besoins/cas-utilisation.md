@@ -84,6 +84,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
  6a.1.1. Le système ne peut pas mettre à jour la base de données.  
  6a.1.2. Un message d'erreur est affiché.  
  6a.1.3. L'avis reste dans son état précédent.  
+
 ---
 ### CU03 - xxx
 
