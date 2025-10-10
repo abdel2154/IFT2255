@@ -88,12 +88,12 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 ---
 ### CU03 - Consulter un profil étudiant
 
-**Acteurs** : Étudiant (Principal), Base de données (Secondaire)
-**Préconditions** : L'étudiant qui fait la recherche et l'étudiant recherché ont leurs profils respectifs.
-**Postconditions** : Le profil de l'étudiant recherché apparaît à l'étudiant qui fait la recherche.
-**Déclencheur** : L'étudiant qui fait la recherche clique sur le profil de l'étudiant recherché dans une liste de profils dans le module de recherche de profils.
-**Dépendances** : CU7: les deux étudiants doivent avoir créé des profils.
-**But** : S'inspirer des choix d'autres étudiants afin d'éclairer ses propres décisions. Contextualiser les avis d'un étudiant donné.
+**Acteurs** : Étudiant (Principal), Base de données (Secondaire)  
+**Préconditions** : L'étudiant qui fait la recherche et l'étudiant recherché ont leurs profils respectifs.  
+**Postconditions** : Le profil de l'étudiant recherché apparaît à l'étudiant qui fait la recherche.    
+**Déclencheur** : L'étudiant qui fait la recherche clique sur le profil de l'étudiant recherché dans une liste de profils dans le module de recherche de profils.  
+**Dépendances** : CU7: les deux étudiants doivent avoir créé des profils.   
+**But** : S'inspirer des choix d'autres étudiants afin d'éclairer ses propres décisions. Contextualiser les avis d'un étudiant donné.  
 
 ---
 ### CU04 - Gérer ses favoris
@@ -205,12 +205,12 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 ---
 ### CU11 - Consulter la fiche d’un cours
 
-**Acteurs** : Étudiant (principal), Base de données (secondaire) API Planifium (secondaire)
-**Préconditions** : L'étudiant a un profil et y est connecté. La fiche du cours qu'il recherche existe.
-**Postconditions** : Les données détaillées du cours recherché sont affichées.
-**Déclencheur** : L'étudiant clique sur le cours désiré dans la liste des cours correspondant à sa recherche dans le module de recherche de cours.
-**Dépendances** : CU7: l'étudiant doit avoir un profil. CU9: l'étudiant doit pouvoir recherche le cours.
-**But** : Accéder aux données pertinentes d'un cours donné afin d'éclairer les décisions de l'étudiant.
+**Acteurs** : Étudiant (principal), Base de données (secondaire) API Planifium (secondaire)  
+**Préconditions** : L'étudiant a un profil et y est connecté. La fiche du cours qu'il recherche existe.  
+**Postconditions** : Les données détaillées du cours recherché sont affichées.  
+**Déclencheur** : L'étudiant clique sur le cours désiré dans la liste des cours correspondant à sa recherche dans le module de recherche de cours.  
+**Dépendances** : CU7: l'étudiant doit avoir un profil. CU9: l'étudiant doit pouvoir recherche le cours.  
+**But** : Accéder aux données pertinentes d'un cours donné afin d'éclairer les décisions de l'étudiant.  
 
 ---
 

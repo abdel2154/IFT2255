@@ -76,7 +76,7 @@ nav:
   - Analyse des besoins: 
     - Présentation générale: besoins/index.md
     - Glossaire: besoins/glossaire.md
-    - Exigences: besoins/exigences.md
+    
     - Besoins non fonctionnels: besoins/besoins-non-fonctionnels.md
     - Besoins matériels, stockage et intégration: besoins/besoins-materiels-integration.md
     - Risques: besoins/risques.md
@@ -87,6 +87,6 @@ nav:
     - Architecture: conception/architecture.md
     - Modèle de données: conception/modeles.md
     - Diagrammes UML: conception/uml.md
-  - Application: application.md
-  - Evaluation: evaluation.md
-  - Bilan: bilan.md
+ # - Application: application.md
+ # - Evaluation: evaluation.md
+ # - Bilan: bilan.md
