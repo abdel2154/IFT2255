@@ -24,8 +24,8 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 | CU04 |Gérer ses favoris| Utilisateur | L’utilisateur ajoute ou retire des cours à sa liste de favoris pour les retrouver plus facilement. |
 | CU05 |Afficher tableau de bord |Étudiant (principal), Base de données (secondaire), API Planifium (secondaire)|L’étudiant voit rapidement l’état de son parcours et ses cours favoris pour mieux planifier son prochain semestre.|
 | CU06 |Comparer cours| Étudiant (principal), Base de données (secondaire) API Planifium (secondaire) | L’étudiant peut comparer plusieurs options côte à côte pour choisir le cours qui correspond le mieux à ses objectifs et à sa disponibilité.|
-| CU07 |...|...|...|
-| CU08 |...|...|...|
+| CU07 | Créer/Mettre à jour un profil | Étudiant | L'étudiant crée ou met à jour son profil personnel. |
+| CU08 | Afficher les avis étudiants | Étudiant | L'étudiant consulte les avis agrégés et commentaires sur un cours. |
 | CU09 |Rechercher cours|Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)|L’étudiant peut rapidement identifier les cours pertinents à son profil et savoir s’il peut s’y inscrire.|
 | CU10 |Afficher résultats académiques d'un cours|Étudiant (principal), API Planifium (secondaire), Base de données (secondaire)|L’étudiant obtient des repères sur la difficulté et la réussite des cours pour décider lesquels s’intègrent le mieux à son parcours.|
 | CU11 |...|...|...|
@@ -118,25 +118,24 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **But** : Permettre à l’étudiant de comparer plusieurs cours pour évaluer la charge de travail et faciliter son choix.
 
 ---
-### CU07 - xxx
+### CU07 - Créer/Mettre à jour un profil étudiant
 
-**Acteurs** :  
-**Préconditions** :    
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
+**Acteurs** : Étudiant (principal), Système (Base de données) (secondaire)  
+**Préconditions** : Pour la création : L'étudiant n'a pas de compte. Pour la mise à jour : L'étudiant est authentifié.  
+**Postconditions** : Succès (Création) : Nouveau profil créé. Succès (Mise à jour) : Modifications sauvegardées. Échec : Message d'erreur affiché.  
+**Déclencheur** : Création : Nouvel utilisateur s'inscrit. Mise à jour : Étudiant authentifié modifie son profil.  
+**Dépendances** : Prérequis pour les CUs nécessitant un profil personnalisé.  
+**But** : Permettre à un étudiant de créer et maintenir son profil pour personnaliser son expérience. 
 
 ---
-### CU08 - xxx
+### CU08 - Afficher les avis étudiants pour un cours
 
-**Acteurs** :   
-**Préconditions** :    
-**Postconditions** :  
-**Déclencheur** :  
-**Dépendances** :  
-**But** :  
-
+**Acteurs** : Étudiant (principal), Système (Base de données) (secondaire)  
+**Préconditions** : Le cours existe. Il existe au moins un avis approuvé et le seuil d'agrégation (n≥5) est atteint.  
+**Postconditions** : Succès : Avis agrégés et commentaires affichés. Échec : Message "Avis insuffisants" affiché.  
+**Déclencheur** : L'étudiant consulte la fiche d'un cours et souhaite voir la section avis.  
+**Dépendances** : Dépend du CU "Modérer les avis" (CU02) et des CUs "Rechercher" (CU09) ou "Consulter fiche" (CU11).  
+**But** : Permettre à l'étudiant de consulter les avis pour évaluer la difficulté et charge de travail.
 ---
 ### CU09 - Rechercher cours
 
