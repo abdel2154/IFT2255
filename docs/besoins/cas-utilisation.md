@@ -76,11 +76,11 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
       6b.5. Le système retire l'avis de la file d'attente de modération.  
 
 **Scénario alternatif:**  
-5a. Le modérateur décide de mettre en pause et de revenir plus tard.  
+ 5a. Le modérateur décide de mettre en pause et de revenir plus tard.  
  5a.1. L'avis reste dans la file d'attente "en cours de modération".  
  5a.2. Le modérateur peut reprendre la modération plus tard.  
 
-6a.1. Erreur lors de l'approbation.  
+ 6a.1. Erreur lors de l'approbation.  
  6a.1.1. Le système ne peut pas mettre à jour la base de données.  
  6a.1.2. Un message d'erreur est affiché.  
  6a.1.3. L'avis reste dans son état précédent.  
@@ -164,6 +164,7 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Déclencheur** : L'étudiant consulte la fiche d'un cours et souhaite voir la section avis.  
 **Dépendances** : Dépend du CU "Modérer les avis" (CU02) et des CUs "Rechercher" (CU09) ou "Consulter fiche" (CU11).  
 **But** : Permettre à l'étudiant de consulter les avis pour évaluer la difficulté et charge de travail.
+
 ---
 ### CU09 - Rechercher cours
 
