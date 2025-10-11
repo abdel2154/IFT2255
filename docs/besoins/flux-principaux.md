@@ -16,5 +16,6 @@ Cette section présente les principaux diagrammes du projet, incluant les diagra
 **Diagramme d'activité**
 ![Diagramme du système](../images/diagramme-activite.png)
 
-
-
+**Modèle C4**
+![Diagramme du système](../images/C4 ChoixCours 1.jpg)
+![Diagramme du système](../images/C4 ChoixCours 2.jpg)
