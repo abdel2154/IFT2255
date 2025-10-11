@@ -35,3 +35,7 @@ Plateforme d’aide à la planification de parcours pour étudiaants
 | Scénarios liés aux CU                         | 9 octobre    | ✅ Terminé | `M2` `M3` `M4`      |
 | Modèle C4                                     | 9 octobre    | ✅ Terminé | `M1`                |
 | Relecture et mise en page finale              | 10 octobre   | ✅ Terminé | `M1` `M2` `M3` `M4` |
+
+
+## Répartition des tâches
+![Répartition taches ](images/repartition.png)
