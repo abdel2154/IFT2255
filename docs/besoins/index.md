@@ -80,4 +80,51 @@ La qualité, la disponibilité et la cohérence de ces dépendances conditionnen
 
 ## Hypothèses et contraintes
 
-TODO: Liste des hypothèses de travail et des contraintes (techniques, organisationnelles, etc.).
+# Hypothèses
+
+Les hypothèses suivantes définissent les conditions de base supposées vraies lors de la conception de la plateforme d’aide au choix de cours.
+
+---
+
+### 1. Sources de données
+- L’**API Planifium** est disponible et fournit des données fiables sur les cours et programmes.  
+- Les **résultats académiques agrégés** sont transmis régulièrement sous format CSV.  
+- Les **avis étudiants** collectés via Discord respectent un format standard et peuvent être intégrés automatiquement.
+
+---
+
+### 2. Confidentialité
+- Les avis étudiants sont **anonymisés** avant leur affichage.  
+- Aucune donnée personnelle (nom, identifiant Discord, etc.) n’est stockée.  
+- Les profils étudiants sont protégés conformément à la **Loi 25** sur la protection des renseignements personnels.
+
+---
+
+### 3. Données et fiabilité
+- Un cours doit avoir **au moins 5 avis (n ≥ 5)** pour que les statistiques soient affichées.  
+- Les fichiers CSV et les données Planifium sont considérés comme exacts et à jour.  
+
+---
+
+### 4. Technique
+- Le système est **hébergé sur un serveur stable** avec une connexion sécurisée (HTTPS).  
+- Les services externes (Planifium, Discord) sont disponibles la plupart du temps.  
+- L’application web respecte les standards modernes (API REST, JSON).  
+
+---
+
+### 5. Utilisation
+- Les **étudiants du DIRO** sont les principaux utilisateurs.  
+- Ils utilisent un **navigateur récent** et une connexion Internet stable.  
+- La plateforme est conçue pour être simple et intuitive, sans besoin de formation.
+
+---
+
+### 6. Hors du périmètre
+- Le système **n’effectue pas d’inscriptions officielles** aux cours.  
+- L’interface visuelle finale est **prototypique** et sert à illustrer les fonctionnalités.  
+
+---
+
+**En résumé :**  
+Le projet suppose que les données externes sont accessibles et fiables, que la confidentialité est assurée, et que les étudiants utilisent la plateforme dans un contexte réaliste et stable.
