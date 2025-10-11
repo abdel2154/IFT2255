@@ -14,7 +14,7 @@ Plateforme d’aide à la planification de parcours pour étudiaants
 
 ## Équipe
 
-- **`M1`:** Ring Thomas (20162157) #nom-utilisateur
+- **`M1`:** Ring Thomas (20162157) #papi_speedrun
 - **`M2`:** Bencheikh El Atmani Ayoub (20237691) #yubito04
 - **`M3`:** Messaad Abdelmouhcine (20287581) #abdel_kb99 
 - **`M4`:** Ujineza Ursuline (20272011) #boredGenie
