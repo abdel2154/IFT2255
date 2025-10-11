@@ -10,14 +10,14 @@ title: Vue d'ensemble
     }
 </style>
 
-# Nom du projet
+Plateforme d’aide à la planification de parcours pour étudiaants
 
 ## Équipe
 
-- **`M1`:** Membre 1 (matricule) #nom-utilisateur
+- **`M1`:** Ring Thomas (20162157) #nom-utilisateur
 - **`M2`:** Bencheikh El Atmani Ayoub (20237691) #yubito04
-- **`M3`:** Abdelmouhcine Messaad (20287581) #abdel_kb99 
-- **`M4`:** Membre 4 (matricule) #nom-utilisateur
+- **`M3`:** Messaad Abdelmouhcine (20287581) #abdel_kb99 
+- **`M4`:** Ujineza Ursuline (20272011) #boredGenie
 
 ## Description du projet
 
