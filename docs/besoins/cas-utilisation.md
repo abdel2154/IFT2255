@@ -103,7 +103,30 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Postconditions** : Le cours est ajouté ou retiré de la liste des favoris persistée dans le profil utilisateur.  
 **Déclencheur** : L’utilisateur clique sur l’icône « Favori » ou accède à sa liste de favoris.  
 **Dépendances** : Système de profil utilisateur et base de données des cours.  
-**But** : Permettre à l’utilisateur de conserver une liste personnalisée de cours qu’il souhaite suivre, comparer ou évaluer plus tard.
+**But** : Permettre à l’utilisateur de conserver une liste personnalisée de cours qu’il souhaite suivre, comparer ou évaluer plus tard.  
+
+**Scénario principal:**  
+1) L’étudiant consulte la fiche d’un cours.  
+2) Le système affiche les détails du cours.  
+3) L’étudiant clique sur “Ajouter aux favoris”.  
+4) Le système enregistre le cours dans la liste de favoris de l’étudiant.  
+5) L’étudiant peut accéder à l’onglet “Favoris” pour consulter tous ses cours enregistrés.  
+6) L’étudiant peut retirer un cours de la liste.  
+7) Le système met à jour la liste des favoris.  
+
+**Scénario alternatif:**  
+3a. Le cours est déjà dans les favoris.   
+  3a.1. Le système affiche un message “Ce cours est déjà dans vos favoris.”  
+  3a.2. L’étudiant peut choisir de le retirer immédiatement.  
+  3a.3. Le système met à jour la liste et affiche la confirmation.  
+
+4a. Une erreur survient lors de l’enregistrement.   
+  4a.1. Le système ne parvient pas à écrire dans la base de données.  
+  4a.2. Le système affiche un message “Erreur lors de l’ajout du cours. Veuillez réessayer.”  
+
+5a. L’étudiant n’a aucun favori enregistré.  
+  5a.1. Le système affiche un message “Aucun cours favori pour le moment.”  
+  5a.2. Il propose d’explorer les cours populaires.  
 
 ---
 ### CU05 - Affficher tableau de bord
@@ -222,6 +245,28 @@ Ces cas permettent de comprendre **ce que fait le système**, sans entrer dans l
 **Déclencheur** : L’utilisateur clique sur « Créer une simulation » ou ajoute un cours à son horaire simulé.  
 **Dépendances** : Données d’horaires de l’API Planifium et informations de cours dans la base locale.  
 **But** : Offrir à l’étudiant une vue interactive de son horaire potentiel afin d’évaluer la charge totale et détecter d’éventuels conflits.
+
+**Scénario principal**  
+1) L’étudiant accède à l’outil de simulation.  
+2) Il sélectionne un trimestre et des cours souhaités.  
+3) Le système récupère les horaires de chaque cours via Planifium.  
+4) Le système affiche une visualisation hebdomadaire de l’horaire.  
+5) L’étudiant ajoute, déplace ou supprime des cours dans la simulation.  
+6) Le système calcule la charge totale de travail et les conflits d’horaire.  
+7) L’étudiant enregistre ou exporte la simulation.  
+
+**Scénarios alternatifs**  
+3a. Un ou plusieurs cours ne sont pas disponibles à la session choisie.  
+ 3a.1. Le système affiche “Cours non offert ce trimestre.”  
+ 3a.2. Il suggère d’autres cours similaires disponibles.  
+
+4a. Conflit horaire entre deux cours.  
+ 4a.1. Le système signale le conflit visuellement.  
+ 4a.2. L’étudiant choisit quel cours garder.  
+
+6a. L’étudiant dépasse le nombre de crédits permis.  
+ 6a.1. Le système affiche un avertissement et empêche la sauvegarde.  
+
 
 ---
 
