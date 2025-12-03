@@ -238,6 +238,137 @@ public class CourseControllerTest {
         }
     }
 
+    /**************************************************************************
+     * Tests for compareCourses method
+     *************************************************************************/
+
+    @Test
+    @DisplayName("Compare courses should return comparison result with valid course IDs")
+    void testCompareCoursesWithValidIds() {
+        // ARRANGE
+        List<String> courseIds = Arrays.asList("IFT2255", "IFT2015");
+        ComparisonService.ComparisonResult expectedResult = new ComparisonService.ComparisonResult();
+        expectedResult.courses = Arrays.asList(
+                new Course("IFT2255", "Génie logiciel"),
+                new Course("IFT2015", "Structures de données"));
+        expectedResult.totalCredits = 6;
+        expectedResult.notFound = new ArrayList<>();
+
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = courseIds;
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockComparisonService.compareCourses(courseIds)).thenReturn(expectedResult);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockComparisonService).compareCourses(courseIds);
+            OK("ComparisonService called with course IDs", false);
+
+            verify(mockContext).json(expectedResult);
+            OK("Comparison result returned successfully");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Compare courses should return 400 when course IDs list is empty")
+    void testCompareCoursesWithEmptyList() {
+        // ARRANGE
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = new ArrayList<>();
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Status 400 set for empty list", false);
+
+            verify(mockContext).json(argThat(map -> map instanceof Map &&
+                    ((Map<?, ?>) map).containsKey("error")));
+            OK("Error message returned", false);
+
+            verify(mockComparisonService, never()).compareCourses(any());
+            OK("ComparisonService was not called");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Compare courses should return 400 when request body is null")
+    void testCompareCoursesWithNullRequest() {
+        // ARRANGE
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(null);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Status 400 set for null request", false);
+
+            verify(mockContext).json(argThat(map -> map instanceof Map &&
+                    ((Map<?, ?>) map).containsKey("error")));
+            OK("Error message returned", false);
+
+            verify(mockComparisonService, never()).compareCourses(any());
+            OK("ComparisonService was not called");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Compare courses should handle partially missing courses")
+    void testCompareCoursesWithPartiallyMissingCourses() {
+        // ARRANGE
+        List<String> courseIds = Arrays.asList("IFT2255", "UNKNOWN123");
+        ComparisonService.ComparisonResult expectedResult = new ComparisonService.ComparisonResult();
+        expectedResult.courses = Arrays.asList(new Course("IFT2255", "Génie logiciel"));
+        expectedResult.totalCredits = 3;
+        expectedResult.notFound = Arrays.asList("UNKNOWN123");
+
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = courseIds;
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockComparisonService.compareCourses(courseIds)).thenReturn(expectedResult);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockComparisonService).compareCourses(courseIds);
+            OK("ComparisonService called with course IDs", false);
+
+            verify(mockContext).json(argThat(result -> result instanceof ComparisonService.ComparisonResult &&
+                    ((ComparisonService.ComparisonResult) result).notFound.contains("UNKNOWN123")));
+            OK("Result includes missing courses", false);
+
+            verify(mockContext, never()).status(anyInt());
+            OK("No error status set - partial results accepted");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
     @AfterAll
     static void printFooter() {
         System.out.println("\n" + "=".repeat(80));
