@@ -76,3 +76,36 @@ La plateforme couvre les **CU suivants** :
 
 ---
 
+> La phase 2 du projet se concentre sur la **conception technique détaillée**, la **première implémentation** du backend et la **création d'une suite de tests**. L'intégration complète des données et l'interface utilisateur avancée sont prévues pour les phases ultérieures.
+
+## Objectifs de la Phase 2
+
+- **Intégrer le feedback** de la Phase 1 et réviser les artefacts existants  
+- **Concevoir une architecture robuste** : modèle C4 niveau 3, diagramme de classes MVC, diagrammes de séquence  
+- **Implémenter les fonctionnalités clés** : recherche de cours, consultation des détails, comparaison de cours  
+- **Produire des tests unitaires** avec JUnit et documenter les oracles de test  
+- **Appliquer les bonnes pratiques** : gestion avancée de Git, modularité, faible couplage  
+
+
+---
+
+## Diagrammes (Phase 2)
+
+- **Modèle C4 (niveau 3)** : découpe détaillée des composants internes du backend (contrôleurs, services, modèles, repositories) et leurs dépendances  
+- **Diagramme de classes** : structure MVC du backend avec abstractions (classes abstraites, interfaces), focalisé sur la couche métier  
+- **Diagrammes de séquence** : illustrent 3 interactions clés (recherche, comparaison, soumission d'avis) incluant le traitement des cas limites et des erreurs
+
+---
+
+## Implémentation et tests (Phase 2)
+
+### Fonctionnalités implémentées
+- **Recherche de cours** : par code, titre ou mots-clés avec vérification d'éligibilité  
+- **Voir les détails d'un cours** : informations Planifium, horaires, résultats académiques  
+- **Comparer des cours** : tableau comparatif, estimation charge de travail, détection conflits
+
+### Tests
+- **Tests unitaires** : minimum 3 par membre avec JUnit, couvrant les services et contrôleurs  
+- **Oracle de tests** : spécification des retours attendus et effets de bord pour chaque test
+
+---
