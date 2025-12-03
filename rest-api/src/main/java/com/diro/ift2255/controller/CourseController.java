@@ -63,13 +63,17 @@ public class CourseController {
     public void compareCourses(Context ctx) {
         CompareRequest req = ctx.bodyAsClass(CompareRequest.class);
 
-        if (req == null || req.courseIds == null || req.courseIds.isEmpty()) {
+        if (validateCourseComparisonSelection(req)) {
             ctx.status(400).json(ResponseUtil.formatError("La liste des cours à comparer est vide ou invalide."));
             return;
         }
 
         ComparisonResult result = comparisonService.compareCourses(req.courseIds);
         ctx.json(result);
+    }
+
+    private boolean validateCourseComparisonSelection(CompareRequest req) {
+        return req == null || req.courseIds == null || req.courseIds.isEmpty();
     }
 
     private boolean validateCourseId(String courseId) {
