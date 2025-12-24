@@ -110,6 +110,32 @@ public class CourseController {
         }
 
         Map<String, String> optionalParams = extractQueryParams(ctx);
+        // Validation des paramètres optionnels
+        if (optionalParams.containsKey("schedule_semester") && !optionalParams.containsKey("include_schedule")) {
+            ctx.status(400).json(ResponseUtil.formatError("'schedule_semester' doit être utilisé uniquement avec 'include_schedule=true'."));
+            return;
+        }
+
+        if (optionalParams.containsKey("include_schedule")) {
+            String inc = optionalParams.get("include_schedule").toLowerCase();
+            if (!inc.equals("true") && !inc.equals("false")) {
+                ctx.status(400).json(ResponseUtil.formatError("'include_schedule' doit être 'true' ou 'false'."));
+                return;
+            }
+        }
+
+        if (optionalParams.containsKey("courses_sigle")) {
+            String list = optionalParams.get("courses_sigle");
+            String[] codes = list.split(",");
+            for (String code : codes) {
+                String t = code.trim();
+                if (t.isEmpty() || !t.matches("(?i)^[A-Z]{2,}\\d{3,4}$")) {
+                    ctx.status(400).json(ResponseUtil.formatError("Le paramètre 'courses_sigle' contient un sigle invalide: " + t));
+                    return;
+                }
+            }
+        }
+
         List<Course> courses = service.getCoursesBySemester(semester, optionalParams);
 
         if (courses.isEmpty()) {

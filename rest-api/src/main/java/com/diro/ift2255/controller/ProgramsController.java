@@ -29,6 +29,13 @@ public class ProgramsController {
             return;
         }
 
+        // Valider le format: liste d'IDs séparés par des virgules (ex: 117510,117511)
+        String programsList = queryParams.get("programs_list").trim();
+        if (!programsList.matches("^[0-9]+(,[0-9]+)*$")) {
+            ctx.status(400).json(ResponseUtil.formatError("Le paramètre 'programs_list' doit être une liste d'IDs numériques séparés par des virgules."));
+            return;
+        }
+
         Map<String, Object> result = courseService.getPrograms(queryParams);
         ctx.json(result);
     }

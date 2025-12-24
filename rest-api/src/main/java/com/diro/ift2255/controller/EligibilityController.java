@@ -31,6 +31,22 @@ public class EligibilityController {
             return;
         }
 
+        // Validation des sigles fournis
+        if (req.completedCourses.size() > 100) {
+            ctx.status(400).json(ResponseUtil.formatError("La liste 'completedCourses' est trop longue."));
+            return;
+        }
+        for (String s : req.completedCourses) {
+            if (s == null || s.trim().isEmpty()) {
+                ctx.status(400).json(ResponseUtil.formatError("Chaque sigle dans 'completedCourses' doit être non vide."));
+                return;
+            }
+            if (!s.trim().matches("(?i)^[A-Z]{2,}\\d{3,4}$")) {
+                ctx.status(400).json(ResponseUtil.formatError("Sigle invalide dans 'completedCourses': " + s));
+                return;
+            }
+        }
+
         ctx.json(eligibilityService.checkEligibility(courseId, req.completedCourses));
     }
 
