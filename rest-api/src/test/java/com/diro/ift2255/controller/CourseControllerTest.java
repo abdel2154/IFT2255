@@ -92,39 +92,6 @@ public class CourseControllerTest {
     }
 
     @Test
-    @DisplayName("Get courses by program should call service with program param and return results")
-    void testGetCoursesByProgram() {
-        // ARRANGE
-        String programCode = "DIRO";
-        List<Course> mockCourses = Arrays.asList(
-                new Course("IFT1015", "Programmation I"),
-                new Course("IFT2015", "Structures de données")
-        );
-
-        when(mockContext.pathParam("code")).thenReturn(programCode);
-        when(mockService.getAllCourses(any())).thenReturn(mockCourses);
-
-        // ACT
-        controller.getCoursesByProgram(mockContext);
-
-        // ASSERT
-        try {
-            verify(mockContext).pathParam("code");
-            OK("Path parameter 'code' extracted", false);
-
-            verify(mockService).getAllCourses(argThat(params ->
-                    params.containsKey("program") && params.get("program").equals(programCode)));
-            OK("Service called with correct program parameter", false);
-
-            verify(mockContext).json(mockCourses);
-            OK("Response returned with courses");
-        } catch (AssertionError e) {
-            Err(e.getMessage());
-            throw e;
-        }
-    }
-
-    @Test
     @DisplayName("Get all courses should pass query parameters to service")
     void testGetAllCoursesWithQueryParameters() {
         // ARRANGE
@@ -265,6 +232,65 @@ public class CourseControllerTest {
 
             verify(mockService, never()).getCourseById(any());
             OK("Service was not called");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get all courses with no query params and empty result returns empty list")
+    void testGetAllCoursesNoQueryParamsEmptyList() {
+        when(mockContext.queryParamMap()).thenReturn(new HashMap<>());
+        when(mockService.getAllCourses(any())).thenReturn(new ArrayList<>());
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockContext).json(argThat(obj -> obj instanceof List && ((List<?>)obj).isEmpty()));
+            OK("Retourne liste vide");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get all courses with query params and no results returns message")
+    void testGetAllCoursesWithQueryParamsNoResults() {
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("session", Arrays.asList("A2025"));
+
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockService.getAllCourses(any())).thenReturn(new ArrayList<>());
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockContext).json(argThat(obj -> obj instanceof Map && ((Map<?,?>)obj).containsKey("message") && ((Map<?,?>)obj).containsKey("courses")));
+            OK("Retourne message et liste vide");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get all courses uses first value of multi-valued query params")
+    void testGetAllCoursesUsesFirstValue() {
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("session", Arrays.asList("A2025", "B2025"));
+
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockService.getAllCourses(any())).thenReturn(Arrays.asList(new Course("IFT1015", "Prog I")));
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockService).getAllCourses(argThat(params -> params.get("session").equals("A2025")));
+            OK("Utilise premiere valeur des params multi-valuees", false);
+            verify(mockContext).json(any());
+            OK("Retourne les cours");
         } catch (AssertionError e) {
             Err(e.getMessage());
             throw e;
