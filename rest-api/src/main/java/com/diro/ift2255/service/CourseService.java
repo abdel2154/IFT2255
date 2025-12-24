@@ -70,4 +70,30 @@ public class CourseService {
             return new HashMap<>();
         }
     }
+
+    /**
+     * Récupère les cours offerts pour un trimestre donné avec options.
+     * Ex : schedule_semester=a25&courses_sigle=ift1015,ift1025&include_schedule=true
+     */
+    public List<Course> getCoursesBySemester(String semester, Map<String, String> optionalParams) {
+        Map<String, String> params = new HashMap<>();
+        params.put("schedule_semester", semester);
+        params.put("include_schedule", "true");
+        
+        if (optionalParams != null) {
+            if (optionalParams.containsKey("courses_sigle")) {
+                params.put("courses_sigle", optionalParams.get("courses_sigle"));
+            }
+        }
+        
+        URI uri = HttpClientApi.buildUri(BASE_URL, params);
+        
+        try {
+            List<Course> courses = clientApi.get(uri, new TypeReference<List<Course>>() {});
+            return (courses != null) ? courses : new ArrayList<>();
+        } catch (RuntimeException e) {
+            System.err.println("Erreur API Planifium (courses by semester): " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
 }

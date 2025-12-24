@@ -97,6 +97,31 @@ public class CourseController {
         ctx.json(result);
     }
 
+    /**
+     * Récupère les cours offerts pour un trimestre spécifique.
+     * Expose: GET /semesters/{semester}/courses?courses_sigle=...&include_schedule=true
+     */
+    public void getCoursesBySemester(Context ctx) {
+        String semester = ctx.pathParam("semester");
+
+        if (semester == null || semester.trim().isEmpty()) {
+            ctx.status(400).json(ResponseUtil.formatError("Le paramètre semester est invalide (ex: a25 pour Automne 2025)."));
+            return;
+        }
+
+        Map<String, String> optionalParams = extractQueryParams(ctx);
+        List<Course> courses = service.getCoursesBySemester(semester, optionalParams);
+
+        if (courses.isEmpty()) {
+            ctx.json(Map.of(
+                    "courses", courses,
+                    "message", "Aucun cours trouvé pour le trimestre: " + semester
+            ));
+        } else {
+            ctx.json(courses);
+        }
+    }
+
     private boolean validateCourseComparisonSelection(CompareRequest req) {
         return req == null || req.courseIds == null || req.courseIds.isEmpty();
     }

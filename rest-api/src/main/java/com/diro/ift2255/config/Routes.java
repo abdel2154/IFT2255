@@ -31,6 +31,9 @@ public class Routes {
         // CU11 - Comparer des cours
         app.post("/courses/compare", courseController::compareCourses);
 
+        // CUxx - Voir les cours offerts d'un trimestre
+        app.get("/semesters/{semester}/courses", courseController::getCoursesBySemester);
+
         // Proxy Planifium - liste de programmes (ex: ?programs_list=117510)
         app.get("/api/v1/programs", programsController::getPrograms);
     }
