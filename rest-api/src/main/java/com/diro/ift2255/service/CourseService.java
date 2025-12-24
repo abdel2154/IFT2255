@@ -96,4 +96,21 @@ public class CourseService {
             return new ArrayList<>();
         }
     }
+
+    /**
+     * Récupère la chaîne complète des prérequis d'un cours.
+     * Appelle: GET /api/v1/courses/{courseId}/prerequisites
+     */
+    public List<Course> getPrerequisites(String courseId) {
+        String prereqUrl = BASE_URL + "/" + courseId + "/prerequisites";
+        URI uri = URI.create(prereqUrl);
+        
+        try {
+            List<Course> prerequisites = clientApi.get(uri, new TypeReference<List<Course>>() {});
+            return (prerequisites != null) ? prerequisites : new ArrayList<>();
+        } catch (RuntimeException e) {
+            System.err.println("Erreur API Planifium (prerequisites): " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
 }

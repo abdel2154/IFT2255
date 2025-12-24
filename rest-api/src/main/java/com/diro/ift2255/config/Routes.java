@@ -4,9 +4,11 @@ import io.javalin.Javalin;
 import com.diro.ift2255.controller.CourseController;
 import com.diro.ift2255.controller.ProgramsController;
 import com.diro.ift2255.controller.AcademicController;
+import com.diro.ift2255.controller.EligibilityController;
 import com.diro.ift2255.service.AcademicService;
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.service.ComparisonService;
+import com.diro.ift2255.service.EligibilityService;
 import com.diro.ift2255.util.HttpClientApi;
 
 public class Routes {
@@ -19,6 +21,8 @@ public class Routes {
         ProgramsController programsController = new ProgramsController(courseService);
         AcademicService academicService = new AcademicService();
         AcademicController academicController = new AcademicController(academicService);
+        EligibilityService eligibilityService = new EligibilityService(courseService);
+        EligibilityController eligibilityController = new EligibilityController(eligibilityService);
 
         // Routes
         app.get("/", ctx -> ctx.result("API de choix de cours - UdeM"));
@@ -40,6 +44,9 @@ public class Routes {
 
         // Résultats académiques CSV
         app.get("/courses/{sigle}/stats", academicController::getCourseStats);
+
+        // Vérifier l'éligibilité à un cours
+        app.post("/courses/{id}/check-eligibility", eligibilityController::checkCourseEligibility);
 
         // Proxy Planifium - liste de programmes (ex: ?programs_list=117510)
         app.get("/api/v1/programs", programsController::getPrograms);
