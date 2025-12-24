@@ -92,6 +92,39 @@ public class CourseControllerTest {
     }
 
     @Test
+    @DisplayName("Get courses by program should call service with program param and return results")
+    void testGetCoursesByProgram() {
+        // ARRANGE
+        String programCode = "DIRO";
+        List<Course> mockCourses = Arrays.asList(
+                new Course("IFT1015", "Programmation I"),
+                new Course("IFT2015", "Structures de données")
+        );
+
+        when(mockContext.pathParam("code")).thenReturn(programCode);
+        when(mockService.getAllCourses(any())).thenReturn(mockCourses);
+
+        // ACT
+        controller.getCoursesByProgram(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).pathParam("code");
+            OK("Path parameter 'code' extracted", false);
+
+            verify(mockService).getAllCourses(argThat(params ->
+                    params.containsKey("program") && params.get("program").equals(programCode)));
+            OK("Service called with correct program parameter", false);
+
+            verify(mockContext).json(mockCourses);
+            OK("Response returned with courses");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
     @DisplayName("Get all courses should pass query parameters to service")
     void testGetAllCoursesWithQueryParameters() {
         // ARRANGE

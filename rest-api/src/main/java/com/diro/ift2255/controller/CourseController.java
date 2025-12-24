@@ -39,6 +39,31 @@ public class CourseController {
     }
 
     /**
+     * Récupère les cours offerts pour un programme donné (par code de programme).
+     * Expose: GET /programs/{code}/courses
+     */
+    public void getCoursesByProgram(Context ctx) {
+        String programCode = ctx.pathParam("code");
+
+        if (programCode == null || programCode.trim().isEmpty()) {
+            ctx.status(400).json(ResponseUtil.formatError("Le paramètre code du programme est invalide."));
+            return;
+        }
+
+        Map<String, String> params = Map.of("program", programCode);
+        List<Course> courses = service.getAllCourses(params);
+
+        if (courses.isEmpty()) {
+            ctx.json(Map.of(
+                    "courses", courses,
+                    "message", "Aucun cours trouvé pour le programme: " + programCode
+            ));
+        } else {
+            ctx.json(courses);
+        }
+    }
+
+    /**
      * Récupère un cours spécifique par son ID.
      */
     public void getCourseById(Context ctx) {
