@@ -3,6 +3,8 @@ package com.diro.ift2255.config;
 import io.javalin.Javalin;
 import com.diro.ift2255.controller.CourseController;
 import com.diro.ift2255.controller.ProgramsController;
+import com.diro.ift2255.controller.AcademicController;
+import com.diro.ift2255.service.AcademicService;
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.service.ComparisonService;
 import com.diro.ift2255.util.HttpClientApi;
@@ -15,6 +17,8 @@ public class Routes {
         ComparisonService comparisonService = new ComparisonService(courseService);
         CourseController courseController = new CourseController(courseService, comparisonService);
         ProgramsController programsController = new ProgramsController(courseService);
+        AcademicService academicService = new AcademicService();
+        AcademicController academicController = new AcademicController(academicService);
 
         // Routes
         app.get("/", ctx -> ctx.result("API de choix de cours - UdeM"));
@@ -33,6 +37,9 @@ public class Routes {
 
         // CUxx - Voir les cours offerts d'un trimestre
         app.get("/semesters/{semester}/courses", courseController::getCoursesBySemester);
+
+        // Résultats académiques CSV
+        app.get("/courses/{sigle}/stats", academicController::getCourseStats);
 
         // Proxy Planifium - liste de programmes (ex: ?programs_list=117510)
         app.get("/api/v1/programs", programsController::getPrograms);
