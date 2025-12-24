@@ -101,6 +101,14 @@ public class CourseController {
      * Récupère les cours offerts pour un trimestre spécifique.
      * Expose: GET /semesters/{semester}/courses?courses_sigle=...&include_schedule=true
      */
+    /**
+     * Récupère la liste des cours offerts pour un trimestre donné.
+     *
+     * Utilise le paramètre semester et relaie les filtres (courses_sigle, include_schedule, schedule_semester) vers Planifium.
+     *
+     * @param ctx Contexte Javalin contenant le code du trimestre et les paramètres de requête.
+     * @return JSON des cours du trimestre ou message d’erreur si entrée invalide.
+     */
     public void getCoursesBySemester(Context ctx) {
         String semester = ctx.pathParam("semester");
 

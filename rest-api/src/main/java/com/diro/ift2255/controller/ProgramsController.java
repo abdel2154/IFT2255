@@ -15,6 +15,20 @@ public class ProgramsController {
 
     /**
      * Proxy vers Planifium : GET /api/v1/programs?programs_list=...&include_courses_detail=true
+     * 
+     * Récupère les cours d'un ou plusieurs programmes d'études.
+     * 
+     * @param ctx le contexte Javalin contenant les paramètres de requête
+     *            - programs_list (requis) : liste d'IDs de programmes séparés par des virgules (ex: 117510,117511)
+     *            - include_courses_detail (optionnel) : booléen pour inclure les détails des cours
+     */
+    /**
+     * Récupère la liste des cours offerts pour un ou plusieurs programmes donnés.
+     *
+     * Proxy vers l’API Planifium avec le paramètre programs_list.
+     *
+     * @param ctx Contexte Javalin contenant les paramètres de requête (programs_list, include_courses_detail).
+     * @return JSON des cours du programme ou message d’erreur si entrée invalide.
      */
     public void getPrograms(Context ctx) {
         Map<String, String> queryParams = new HashMap<>();

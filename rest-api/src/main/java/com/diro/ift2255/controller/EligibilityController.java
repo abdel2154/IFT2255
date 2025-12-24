@@ -17,6 +17,14 @@ public class EligibilityController {
      * POST /courses/{id}/check-eligibility
      * Body: { "completedCourses": ["IFT1015", "IFT1025", ...] }
      */
+    /**
+     * Vérifie l’éligibilité d’un étudiant à un cours donné.
+     *
+     * Analyse la liste des cours complétés et compare aux prérequis du cours via Planifium.
+     *
+     * @param ctx Contexte Javalin contenant l’id du cours et le body JSON {"completedCourses": [...]}
+     * @return JSON indiquant si l’étudiant est éligible, les prérequis manquants et un message.
+     */
     public void checkCourseEligibility(Context ctx) {
         String courseId = ctx.pathParam("id");
 
