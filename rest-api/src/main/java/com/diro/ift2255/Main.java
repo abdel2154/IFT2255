@@ -20,6 +20,7 @@ public class Main {
         System.out.println("Commandes disponibles:");
         System.out.println(" - quitter");
         System.out.println(" - demarrerServeur");
+        System.out.println(" - rechercherCours");
 
         Javalin app = null;
 
@@ -40,7 +41,7 @@ public class Main {
                     break;
 
                 case "rechercherCours":
-                    System.out.println("Veuillez entrer un sigle de cours.");
+                    System.out.println("Veuillez entrer un sigle de cours, avec la matière en minuscule.");
                     String sigle = scanner.nextLine().trim();
 
                     Optional<Course> optionalCourse = courseService.getCourseById(sigle);
@@ -49,6 +50,10 @@ public class Main {
                         Course course = optionalCourse.get();
                         System.out.println("Cours trouvé: " + course.getName() + " (" + course.getId() + ")");
                         System.out.println("Description: " + course.getDescription());
+                        System.out.println("Crédits: " + course.getCredits());
+                        System.out.println("Sessions: " + course.getAvailable_terms());
+                        System.out.println("Périodes: " + course.getAvailable_periods());
+                        System.out.println("Prérequis et concomitants: " + course.getRequirement_text());
                     }
 
 
