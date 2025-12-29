@@ -2,6 +2,7 @@ package com.diro.ift2255.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {
@@ -15,6 +16,9 @@ public class Course {
     private List<String> corequisites;   // Co-requis
     private String cycle;                // 1er cycle, 2e cycle, etc.
     private String schedule;             // Horaire
+    private Map<String, Boolean> available_terms;
+    private Map<String, Boolean> available_periods;
+    private String requirement_text;
 
     // Résultats académiques
     private double moyenne;
@@ -32,12 +36,6 @@ public class Course {
         this.name = name;
     }
 
-    public Course(String id, String name, String desc, int credits) {
-        this(id, name);
-        this.description = desc;
-        this.credits = credits;
-    }
-
     // Getters et Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
@@ -50,6 +48,15 @@ public class Course {
 
     public int getCredits() { return credits; }
     public void setCredits(int credits) { this.credits = credits; }
+
+    public Map<String, Boolean> getAvailable_terms() {return available_terms; }
+    public void setAvailable_terms(Map<String, Boolean> available_terms) {this.available_terms = available_terms;}
+
+    public Map<String, Boolean> getAvailable_periods() {return available_periods; }
+    public void setAvailable_periods(Map<String, Boolean> available_periods) {this.available_periods = available_periods;}
+
+    public String getRequirement_text() {return requirement_text; }
+    public void setRequirement_text(String requirement_text) {this.requirement_text = requirement_text;}
 
     public List<String> getPrerequisites() { return prerequisites; }
     public void setPrerequisites(List<String> prerequisites) { this.prerequisites = prerequisites; }

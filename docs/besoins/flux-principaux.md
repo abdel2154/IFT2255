@@ -35,3 +35,13 @@ Cette section présente les principaux diagrammes du projet, incluant les diagra
 
 **Diagramme des classes**
 ![Diagramme du système](../images/diagramme_classes.png)
+
+**Diagrammes de séquence**
+### Recherche de cours (CU09)
+![Diagramme du système](../images/SequenceRechercherCours.png)
+
+### Comparaison de cours (CU06)
+![Diagramme du système](../images/SequenceComparerCours.png)
+
+### Soumission d'avis (Phase 2)
+![Diagramme du système](../images/SequenceSoumettreAvis.png)

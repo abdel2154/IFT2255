@@ -38,4 +38,4 @@ Plateforme d’aide à la planification de parcours pour étudiaants
 
 
 ## Répartition des tâches
-![Répartition taches ](images/repartition.png)
+![Répartition taches ](images/taches.png)

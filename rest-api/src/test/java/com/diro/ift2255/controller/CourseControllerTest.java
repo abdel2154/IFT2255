@@ -238,6 +238,351 @@ public class CourseControllerTest {
         }
     }
 
+    @Test
+    @DisplayName("Get all courses with no query params and empty result returns empty list")
+    void testGetAllCoursesNoQueryParamsEmptyList() {
+        when(mockContext.queryParamMap()).thenReturn(new HashMap<>());
+        when(mockService.getAllCourses(any())).thenReturn(new ArrayList<>());
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockContext).json(argThat(obj -> obj instanceof List && ((List<?>)obj).isEmpty()));
+            OK("Retourne liste vide");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get all courses with query params and no results returns message")
+    void testGetAllCoursesWithQueryParamsNoResults() {
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("session", Arrays.asList("A2025"));
+
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockService.getAllCourses(any())).thenReturn(new ArrayList<>());
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockContext).json(argThat(obj -> obj instanceof Map && ((Map<?,?>)obj).containsKey("message") && ((Map<?,?>)obj).containsKey("courses")));
+            OK("Retourne message et liste vide");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get all courses uses first value of multi-valued query params")
+    void testGetAllCoursesUsesFirstValue() {
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("session", Arrays.asList("A2025", "B2025"));
+
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockService.getAllCourses(any())).thenReturn(Arrays.asList(new Course("IFT1015", "Prog I")));
+
+        controller.getAllCourses(mockContext);
+
+        try {
+            verify(mockService).getAllCourses(argThat(params -> params.get("session").equals("A2025")));
+            OK("Utilise premiere valeur des params multi-valuees", false);
+            verify(mockContext).json(any());
+            OK("Retourne les cours");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**************************************************************************
+     * Tests for getCoursesBySemester method
+     *************************************************************************/
+
+    @Test
+    @DisplayName("Get courses by semester should return courses when semester is valid")
+    void testGetCoursesBySemesterValid() {
+        // ARRANGE
+        String semester = "a25";
+        List<Course> mockCourses = Arrays.asList(
+                new Course("IFT1015", "Programmation I"),
+                new Course("IFT1025", "Programmation II"));
+
+        when(mockContext.pathParam("semester")).thenReturn(semester);
+        when(mockContext.queryParamMap()).thenReturn(new HashMap<>());
+        when(mockService.getCoursesBySemester(eq(semester), any())).thenReturn(mockCourses);
+
+        // ACT
+        controller.getCoursesBySemester(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockService).getCoursesBySemester(semester, any(Map.class));
+            OK("Service appelé avec semester", false);
+            verify(mockContext).json(mockCourses);
+            OK("Retourne liste de cours");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get courses by semester should return 400 when semester is null")
+    void testGetCoursesBySemesterNull() {
+        // ARRANGE
+        when(mockContext.pathParam("semester")).thenReturn(null);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.getCoursesBySemester(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Statut 400 pour semester null", false);
+            verify(mockContext).json(argThat(map -> map instanceof Map && ((Map<?,?>)map).containsKey("error")));
+            OK("Message d'erreur retourné");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get courses by semester should reject invalid courses_sigle format")
+    void testGetCoursesBySemesterInvalidSigle() {
+        // ARRANGE
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("courses_sigle", Arrays.asList("INVALID"));
+
+        when(mockContext.pathParam("semester")).thenReturn("a25");
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.getCoursesBySemester(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Statut 400 pour sigle invalide", false);
+            verify(mockService, never()).getCoursesBySemester(any(), any());
+            OK("Service non appelé");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get courses by semester accepts valid courses_sigle list")
+    void testGetCoursesBySemesterValidSigleList() {
+        // ARRANGE
+        Map<String, List<String>> queryParamMap = new HashMap<>();
+        queryParamMap.put("courses_sigle", Arrays.asList("IFT1015,IFT1025"));
+
+        when(mockContext.pathParam("semester")).thenReturn("a25");
+        when(mockContext.queryParamMap()).thenReturn(queryParamMap);
+        when(mockService.getCoursesBySemester(any(), any())).thenReturn(new ArrayList<>());
+
+        // ACT
+        controller.getCoursesBySemester(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockService).getCoursesBySemester(eq("a25"), argThat(m -> m.containsKey("courses_sigle")));
+            OK("Service appelé avec courses_sigle", false);
+            verify(mockContext).json(any());
+            OK("Retourne resultat");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Get courses by semester returns message when no results found")
+    void testGetCoursesBySemesterNoResults() {
+        // ARRANGE
+        when(mockContext.pathParam("semester")).thenReturn("a25");
+        when(mockContext.queryParamMap()).thenReturn(new HashMap<>());
+        when(mockService.getCoursesBySemester(any(), any())).thenReturn(new ArrayList<>());
+
+        // ACT
+        controller.getCoursesBySemester(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).json(argThat(obj -> obj instanceof Map && ((Map<?,?>)obj).containsKey("message")));
+            OK("Retourne message quand aucun cours");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Comparer des cours devrait retourner un résultat avec des IDs valides")
+    void testCompareCoursesWithValidIds() {
+        // ARRANGE
+        List<String> courseIds = Arrays.asList("IFT2255", "IFT2015");
+        ComparisonService.ComparisonResult expectedResult = new ComparisonService.ComparisonResult();
+        expectedResult.courses = Arrays.asList(
+                new Course("IFT2255", "Génie logiciel"),
+                new Course("IFT2015", "Structures de données"));
+        expectedResult.totalCredits = 6;
+        expectedResult.notFound = new ArrayList<>();
+
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = courseIds;
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockComparisonService.compareCourses(courseIds)).thenReturn(expectedResult);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockComparisonService).compareCourses(courseIds);
+            OK("Service de comparaison appelé avec les IDs", false);
+
+            verify(mockContext).json(expectedResult);
+            OK("Résultat de comparaison retourné avec succès");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Comparer des cours devrait retourner 400 quand la liste est vide")
+    void testCompareCoursesWithEmptyList() {
+        // ARRANGE
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = new ArrayList<>();
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Statut 400 défini pour liste vide", false);
+
+            verify(mockContext).json(argThat(map -> map instanceof Map &&
+                    ((Map<?, ?>) map).containsKey("error")));
+            OK("Message d'erreur retourné", false);
+
+            verify(mockComparisonService, never()).compareCourses(any());
+            OK("Service de comparaison non appelé");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Comparer des cours devrait retourner 400 quand la requête est null")
+    void testCompareCoursesWithNullRequest() {
+        // ARRANGE
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(null);
+        when(mockContext.status(400)).thenReturn(mockContext);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockContext).status(400);
+            OK("Statut 400 défini pour requête null", false);
+
+            verify(mockContext).json(argThat(map -> map instanceof Map &&
+                    ((Map<?, ?>) map).containsKey("error")));
+            OK("Message d'erreur retourné", false);
+
+            verify(mockComparisonService, never()).compareCourses(any());
+            OK("Service de comparaison non appelé");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Comparer des cours devrait retourner resultat avec certains cours non trouves")
+    void testCompareCoursesWithSomeNotFound() {
+        // ARRANGE
+        List<String> courseIds = Arrays.asList("IFT2255", "XXX9999");
+        ComparisonService.ComparisonResult expectedResult = new ComparisonService.ComparisonResult();
+        expectedResult.courses = Arrays.asList(
+                new Course("IFT2255", "Génie logiciel"));
+        expectedResult.totalCredits = 3;
+        expectedResult.notFound = Arrays.asList("XXX9999");
+
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = courseIds;
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockComparisonService.compareCourses(courseIds)).thenReturn(expectedResult);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockComparisonService).compareCourses(courseIds);
+            OK("Service de comparaison appelé avec les IDs", false);
+
+            verify(mockContext).json(argThat(result -> 
+                result instanceof ComparisonService.ComparisonResult && 
+                ((ComparisonService.ComparisonResult)result).notFound.contains("XXX9999")));
+            OK("Resultat contient courses not found");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Test
+    @DisplayName("Comparer des cours devrait retourner resultat avec un seul cours valide")
+    void testCompareCoursesWithSingleCourse() {
+        // ARRANGE
+        List<String> courseIds = Arrays.asList("IFT2255");
+        ComparisonService.ComparisonResult expectedResult = new ComparisonService.ComparisonResult();
+        expectedResult.courses = Arrays.asList(
+                new Course("IFT2255", "Génie logiciel"));
+        expectedResult.totalCredits = 3;
+        expectedResult.notFound = new ArrayList<>();
+
+        CourseController.CompareRequest req = new CourseController.CompareRequest();
+        req.courseIds = courseIds;
+
+        when(mockContext.bodyAsClass(CourseController.CompareRequest.class)).thenReturn(req);
+        when(mockComparisonService.compareCourses(courseIds)).thenReturn(expectedResult);
+
+        // ACT
+        controller.compareCourses(mockContext);
+
+        // ASSERT
+        try {
+            verify(mockComparisonService).compareCourses(courseIds);
+            OK("Service de comparaison appelé avec un seul ID", false);
+
+            verify(mockContext).json(expectedResult);
+            OK("Resultat retourné avec un seul cours");
+        } catch (AssertionError e) {
+            Err(e.getMessage());
+            throw e;
+        }
+    }
+
     @AfterAll
     static void printFooter() {
         System.out.println("\n" + "=".repeat(80));

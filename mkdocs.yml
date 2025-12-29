@@ -80,6 +80,7 @@ nav:
     - Besoins non fonctionnels: besoins/besoins-non-fonctionnels.md
     - Besoins matériels, stockage et intégration: besoins/besoins-materiels-integration.md
     - Risques: besoins/risques.md
+    - Tests unitaires: besoins/tests-unitaires.md
     - Cas d'utilisation: besoins/cas-utilisation.md
     - Flux principaux: besoins/flux-principaux.md
  # - Conception:
