@@ -4,10 +4,7 @@ import com.diro.ift2255.model.AcademicStats;
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.model.EligibilityResult;
 import com.diro.ift2255.serveur.DemarreurServeur;
-import com.diro.ift2255.service.AcademicService;
-import com.diro.ift2255.service.ComparisonService;
-import com.diro.ift2255.service.CourseService;
-import com.diro.ift2255.service.EligibilityService;
+import com.diro.ift2255.service.*;
 import com.diro.ift2255.util.*;
 import io.javalin.Javalin;
 
@@ -24,6 +21,7 @@ public class Main {
         AcademicService academicService = new AcademicService();
         ComparisonService comparisonService = new ComparisonService(courseService);
         EligibilityService eligibilityService = new EligibilityService(courseService);
+        AvisService avisService = new AvisService();
 
         System.out.println(System.lineSeparator() + "Bienvenue à ChoixCours: un logiciel vous permettant d'éclairer vos choix de cours universitaires." + System.lineSeparator());
         System.out.println("Commandes disponibles:");
@@ -33,6 +31,7 @@ public class Main {
         System.out.println(" - rechercherCours");
         System.out.println(" - verifierEligibilite");
         System.out.println(" - voirResultatsAcademiques");
+        System.out.println(" - voirAvis");
 
         Javalin app = null;
 
@@ -102,6 +101,19 @@ public class Main {
                         System.out.println("Participant.es: " + stats.getParticipants());
                         System.out.println("Trimestres: " + stats.getTrimestres());
                     }
+                    break;
+
+                case "voirAvis":
+                    System.out.println("Veuillez entrer un sigle de cours, avec les lettres en minuscule.");
+                    String sigleAvis = scanner.nextLine().trim();
+
+                    AvisService.AvisSummary summary = avisService.getAvisForCourse(sigleAvis);
+
+                    System.out.println("Nombre d'avis: " + summary.getCount());
+                    System.out.println("Difficulté moyenne: " + summary.getAvgDifficulty());
+                    System.out.println("Charge de travail moyenne: " + summary.getAvgWorkload());
+                    System.out.println(summary.getMessage());
+
                     break;
 
 
