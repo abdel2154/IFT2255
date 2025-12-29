@@ -6,6 +6,7 @@ import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.service.ComparisonService;
 import com.diro.ift2255.service.ComparisonService.ComparisonResult;
 import com.diro.ift2255.util.ResponseUtil;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class CourseController {
     private final CourseService service;
     private final ComparisonService comparisonService;
 
-    public CourseController(CourseService service, ComparisonService comparisonService) { // MODIF
+    public CourseController(CourseService service, ComparisonService comparisonService) {
         this.service = service;
         this.comparisonService = comparisonService;
     }
@@ -177,4 +178,49 @@ public class CourseController {
     public static class CompareRequest {
         public List<String> courseIds;
     }
+    /**
+     * Voir l'horaire d'un cours pour un trimestre donné.
+     * Endpoint : GET /courses/{id}/schedule?semester=a25
+     */
+    public void getCourseSchedule(Context ctx) {
+        String id = ctx.pathParam("id");
+
+        // Validation de l'ID du cours
+        if (!validateCourseId(id)) {
+            ctx.status(400).json(ResponseUtil.formatError("Le paramètre id n'est pas valide."));
+            return;
+        }
+
+        // Récupération du trimestre (ex: a25, h25...)
+        String semester = ctx.queryParam("semester");
+        if (semester == null || semester.isBlank()) {
+            ctx.status(400).json(
+                    ResponseUtil.formatError("Le paramètre de requête 'semester' est requis (ex: a25).")
+            );
+            return;
+        }
+
+        // Appel au service
+        Optional<Course> courseOpt = service.getCourseSchedule(id, semester);
+
+        if (courseOpt.isPresent()) {
+            // On renvoie le cours complet, qui contient l'horaire dans le champ "schedule"
+            ctx.json(courseOpt.get());
+        } else {
+            ctx.status(404).json(
+                    ResponseUtil.formatError(
+                            "Aucun horaire trouvé pour le cours " + id +
+                                    " au trimestre " + semester
+                    )
+            );
+        }
+    }
+    public static class AvisRequest {
+        public int difficulty;
+        public int workload;
+        public String comment;
+        public String author;
+    }
+
+
 }
