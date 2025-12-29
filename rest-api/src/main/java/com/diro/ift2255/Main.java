@@ -2,10 +2,12 @@ package com.diro.ift2255;
 
 import com.diro.ift2255.model.AcademicStats;
 import com.diro.ift2255.model.Course;
+import com.diro.ift2255.model.EligibilityResult;
 import com.diro.ift2255.serveur.DemarreurServeur;
 import com.diro.ift2255.service.AcademicService;
 import com.diro.ift2255.service.ComparisonService;
 import com.diro.ift2255.service.CourseService;
+import com.diro.ift2255.service.EligibilityService;
 import com.diro.ift2255.util.*;
 import io.javalin.Javalin;
 
@@ -21,13 +23,15 @@ public class Main {
         CourseService courseService = new CourseService(clientApi);
         AcademicService academicService = new AcademicService();
         ComparisonService comparisonService = new ComparisonService(courseService);
+        EligibilityService eligibilityService = new EligibilityService(courseService);
 
         System.out.println(System.lineSeparator() + "Bienvenue à ChoixCours: un logiciel vous permettant d'éclairer vos choix de cours universitaires." + System.lineSeparator());
         System.out.println("Commandes disponibles:");
         System.out.println(" - quitter");
         System.out.println(" - demarrerServeur");
-        System.out.println(" - rechercherCours");
         System.out.println(" - comparerCours");
+        System.out.println(" - rechercherCours");
+        System.out.println(" - verifierEligibilite");
 
         Javalin app = null;
 
@@ -70,6 +74,7 @@ public class Main {
                         System.out.println("Participant.es: " + stats.getParticipants());
                         System.out.println("Trimestres: " + stats.getTrimestres());
                     }
+                    break;
 
                 case "comparerCours":
                     System.out.println("Veuillez entrer les sigles des cours que vous souhaitez comparer, avec un espace entre chaque sigle, et les lettres en minuscule.");
@@ -79,6 +84,21 @@ public class Main {
                     System.out.println("Crédits totaux: " + comparaison.totalCredits);
                     System.out.println("Heures de travail estimées par semaine: " + comparaison.estimatedWorkload);
                     System.out.println(" Recommandation: " + comparaison.recommendation);
+                    break;
+
+                case "verifierEligibilite":
+                    System.out.println("Veuillez entrer le sigle du cours pour lequel vous souhaitez vérifier votre éligibilité.");
+                    String coursId = scanner.nextLine();
+                    System.out.println("Veuillez entrer les sigles des cours que vous avez complétés.");
+                    List<String> coursSuivis = List.of(scanner.nextLine().split(" "));
+
+                    EligibilityResult eligibility = eligibilityService.checkEligibility(coursId, coursSuivis);
+                    System.out.println(eligibility.getMessage());
+                    break;
+
+
+                default:
+                    System.out.println("Commande inconnue. Tapez 'aide' pour la liste des commandes.");
 
 
             }
