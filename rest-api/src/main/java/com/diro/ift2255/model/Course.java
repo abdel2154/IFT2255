@@ -36,21 +36,6 @@ public class Course {
         this.name = name;
     }
 
-    public Course(String id, String name, String desc, int credits) {
-        this(id, name);
-        this.description = desc;
-        this.credits = credits;
-    }
-
-    public Course(String id, String name, String desc, int credits, Map<String, Boolean> sessions, Map<String, Boolean> periodes, String prerequis_concom) {
-        this(id, name);
-        this.description = desc;
-        this.credits = credits;
-        this.available_terms = sessions;
-        this.available_periods = periodes;
-        this.requirement_text = prerequis_concom;
-    }
-
     // Getters et Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }

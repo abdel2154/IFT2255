@@ -1,11 +1,15 @@
 package com.diro.ift2255;
 
+import com.diro.ift2255.model.AcademicStats;
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.serveur.DemarreurServeur;
+import com.diro.ift2255.service.AcademicService;
+import com.diro.ift2255.service.ComparisonService;
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.*;
 import io.javalin.Javalin;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -15,12 +19,15 @@ public class Main {
 
         HttpClientApi clientApi = new HttpClientApi();
         CourseService courseService = new CourseService(clientApi);
+        AcademicService academicService = new AcademicService();
+        ComparisonService comparisonService = new ComparisonService(courseService);
 
         System.out.println(System.lineSeparator() + "Bienvenue à ChoixCours: un logiciel vous permettant d'éclairer vos choix de cours universitaires." + System.lineSeparator());
         System.out.println("Commandes disponibles:");
         System.out.println(" - quitter");
         System.out.println(" - demarrerServeur");
         System.out.println(" - rechercherCours");
+        System.out.println(" - comparerCours");
 
         Javalin app = null;
 
@@ -41,10 +48,11 @@ public class Main {
                     break;
 
                 case "rechercherCours":
-                    System.out.println("Veuillez entrer un sigle de cours, avec la matière en minuscule.");
+                    System.out.println("Veuillez entrer un sigle de cours, avec les lettres en minuscule.");
                     String sigle = scanner.nextLine().trim();
 
                     Optional<Course> optionalCourse = courseService.getCourseById(sigle);
+                    Optional<AcademicStats> optionalAcademicStats = academicService.getStatsBySigle(sigle);
 
                     if (optionalCourse.isPresent()) {
                         Course course = optionalCourse.get();
@@ -55,6 +63,22 @@ public class Main {
                         System.out.println("Périodes: " + course.getAvailable_periods());
                         System.out.println("Prérequis et concomitants: " + course.getRequirement_text());
                     }
+                    if (optionalAcademicStats.isPresent()) {
+                        AcademicStats stats = optionalAcademicStats.get();
+                        System.out.println("Moyenne: " + stats.getMoyenne());
+                        System.out.println("Score: " + stats.getScore());
+                        System.out.println("Participant.es: " + stats.getParticipants());
+                        System.out.println("Trimestres: " + stats.getTrimestres());
+                    }
+
+                case "comparerCours":
+                    System.out.println("Veuillez entrer les sigles des cours que vous souhaitez comparer, avec un espace entre chaque sigle, et les lettres en minuscule.");
+                    List<String> courseIds = List.of(scanner.nextLine().split(" "));
+
+                    ComparisonService.ComparisonResult comparaison = comparisonService.compareCourses(courseIds);
+                    System.out.println("Crédits totaux: " + comparaison.totalCredits);
+                    System.out.println("Heures de travail estimées par semaine: " + comparaison.estimatedWorkload);
+                    System.out.println(" Recommandation: " + comparaison.recommendation);
 
 
             }
