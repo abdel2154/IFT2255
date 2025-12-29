@@ -32,6 +32,7 @@ public class Main {
         System.out.println(" - comparerCours");
         System.out.println(" - rechercherCours");
         System.out.println(" - verifierEligibilite");
+        System.out.println(" - voirResultatsAcademiques");
 
         Javalin app = null;
 
@@ -56,7 +57,6 @@ public class Main {
                     String sigle = scanner.nextLine().trim();
 
                     Optional<Course> optionalCourse = courseService.getCourseById(sigle);
-                    Optional<AcademicStats> optionalAcademicStats = academicService.getStatsBySigle(sigle);
 
                     if (optionalCourse.isPresent()) {
                         Course course = optionalCourse.get();
@@ -66,13 +66,6 @@ public class Main {
                         System.out.println("Sessions: " + course.getAvailable_terms());
                         System.out.println("Périodes: " + course.getAvailable_periods());
                         System.out.println("Prérequis et concomitants: " + course.getRequirement_text());
-                    }
-                    if (optionalAcademicStats.isPresent()) {
-                        AcademicStats stats = optionalAcademicStats.get();
-                        System.out.println("Moyenne: " + stats.getMoyenne());
-                        System.out.println("Score: " + stats.getScore());
-                        System.out.println("Participant.es: " + stats.getParticipants());
-                        System.out.println("Trimestres: " + stats.getTrimestres());
                     }
                     break;
 
@@ -96,9 +89,24 @@ public class Main {
                     System.out.println(eligibility.getMessage());
                     break;
 
+                case "voirResultatsAcademiques":
+                    System.out.println("Veuillez entrer un sigle de cours, avec les lettres en minuscule.");
+                    String sigleAcad = scanner.nextLine().trim();
+
+                    Optional<AcademicStats> optionalAcademicStats = academicService.getStatsBySigle(sigleAcad);
+
+                    if (optionalAcademicStats.isPresent()) {
+                        AcademicStats stats = optionalAcademicStats.get();
+                        System.out.println("Moyenne: " + stats.getMoyenne());
+                        System.out.println("Score: " + stats.getScore());
+                        System.out.println("Participant.es: " + stats.getParticipants());
+                        System.out.println("Trimestres: " + stats.getTrimestres());
+                    }
+                    break;
+
 
                 default:
-                    System.out.println("Commande inconnue. Tapez 'aide' pour la liste des commandes.");
+                    System.out.println("Commande inconnue.");
 
 
             }
