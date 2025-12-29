@@ -109,3 +109,90 @@ La plateforme couvre les **CU suivants** :
 - **Oracle de tests** : spécification des retours attendus et effets de bord pour chaque test
 
 ---
+
+## Phase 3 – Implémentation de la solution
+
+### Vue d’ensemble
+Cette phase consiste à compléter l’implémentation de la solution définie lors des phases précédentes.  
+L’objectif est de fournir une application fonctionnelle respectant la conception établie, intégrant une API REST, une interface en ligne de commande (CLI), ainsi que la collecte d’avis étudiants via un bot Discord.
+
+L’implémentation met l’accent sur la validation des données, la robustesse face aux entrées invalides et la conformité aux exigences fonctionnelles du projet.
+
+---
+
+### Fonctionnalités implémentées
+
+#### Recherche de cours
+- Recherche de cours par sigle partiel (ex. `IFT`)
+- Recherche par mots-clés dans le titre ou la description
+
+#### Consultation des cours
+- Consultation des cours offerts dans un programme donné
+- Consultation des cours offerts pour un trimestre donné (H25, A24, E24)
+- Possibilité de limiter les résultats à un programme spécifique
+
+#### Horaire
+- Consultation de l’horaire d’un cours pour un trimestre donné
+- Distinction des sections et des types d’activités
+
+#### Vérification d’éligibilité
+- Vérification de l’éligibilité à un cours à partir :
+  - de la liste des cours complétés par l’étudiant
+  - du cycle d’études
+- Validation des prérequis et du cycle approprié
+
+#### Résultats académiques
+- Consultation des résultats académiques agrégés d’un cours
+- Affichage d’un message d’erreur convivial lorsque les données ne sont pas disponibles
+
+#### Avis étudiants
+- Consultation des avis étudiants agrégés pour un cours
+- Soumission d’avis étudiants via un bot Discord
+
+#### Comparaison de cours
+- Comparaison de deux cours en utilisant :
+  - les avis étudiants (charge de travail perçue)
+  - les résultats académiques agrégés (difficulté estimée)
+  - les informations du catalogue pour les autres critères
+
+#### Ensembles de cours
+- Création d’un ensemble de cours (maximum 6)
+- Affichage de l’horaire résultant pour un trimestre donné
+
+---
+
+### API REST
+L’API REST agit comme une façade au-dessus de l’API Planifium et expose des endpoints simplifiés, adaptés aux cas d’utilisation du projet.  
+Les requêtes sont validées et les réponses suivent un format standard, tant en cas de succès qu’en cas d’erreur.
+
+L’application est conçue pour éviter les arrêts abrupts et gérer les entrées invalides de manière contrôlée.
+
+---
+
+### Interface en ligne de commande (CLI)
+Une interface CLI est fournie afin de permettre l’interaction avec l’API REST.  
+Elle permet de naviguer entre les différentes fonctionnalités de manière claire et intuitive, sans nécessiter d’interface graphique.
+
+---
+
+### Tests
+Un ensemble de tests unitaires a été développé à l’aide de JUnit afin de valider les fonctionnalités principales de l’application.  
+Les tests ciblent des méthodes représentant la logique métier et excluent les constructeurs, getters et setters.
+
+Pour chaque test, un oracle de test est défini dans le rapport, précisant :
+- les paramètres d’entrée,
+- le résultat attendu,
+- les effets de bord éventuels.
+
+---
+
+### Organisation du code
+L’implémentation respecte la conception définie lors de la phase précédente.  
+Les classes, leurs attributs et leurs méthodes correspondent au diagramme de classes établi, et les relations entre les composantes sont maintenues.
+
+---
+
+### Conclusion de la phase
+La phase d’implémentation permet de livrer une application fonctionnelle répondant aux exigences du projet.  
+Les fonctionnalités demandées sont intégrées, testées et documentées, assurant une base solide pour l’utilisation et l’évaluation du système.
+
