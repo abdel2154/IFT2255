@@ -1,6 +1,9 @@
 package com.diro.ift2255.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+/**
+ * Représente un utilisateur de l’application.
+ */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {

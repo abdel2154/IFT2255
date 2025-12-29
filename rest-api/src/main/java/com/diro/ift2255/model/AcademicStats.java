@@ -10,6 +10,11 @@ public class AcademicStats {
 
     public AcademicStats() {}
 
+/**
+ * Représente les statistiques académiques
+ * agrégées associées à un cours.
+ */
+
     public AcademicStats(String sigle, String nom, String moyenne, int score, int participants, int trimestres) {
         this.sigle = sigle;
         this.nom = nom;

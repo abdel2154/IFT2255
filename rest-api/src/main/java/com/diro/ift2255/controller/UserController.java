@@ -10,6 +10,9 @@ import com.diro.ift2255.util.ValidationUtil;
 
 import io.javalin.http.Context;
 
+/**
+ * Gère les opérations REST liées aux utilisateurs.
+ */
 
 public class UserController {
     // Service qui contient la logique métier pour la manipulation des utilisateurs (users) et la communication avec les services externes

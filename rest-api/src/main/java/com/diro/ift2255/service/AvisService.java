@@ -4,6 +4,9 @@ import com.diro.ift2255.model.Avis;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+/**
+ * Gère la logique métier associée aux avis étudiants.
+ */
 
 public class AvisService {
 

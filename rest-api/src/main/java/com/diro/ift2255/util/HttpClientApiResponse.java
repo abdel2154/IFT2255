@@ -1,5 +1,8 @@
 package com.diro.ift2255.util;
 
+/**
+ * Représente la réponse retournée par une requête HTTP.
+ */
 
 public class HttpClientApiResponse {
     private final int statusCode;

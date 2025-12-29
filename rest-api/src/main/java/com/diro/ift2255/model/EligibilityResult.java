@@ -1,6 +1,10 @@
 package com.diro.ift2255.model;
 
 import java.util.List;
+/**
+ * Représente le résultat d’une vérification
+ * d’éligibilité à un cours.
+ */
 
 public class EligibilityResult {
     private String courseId;

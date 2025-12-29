@@ -1,6 +1,9 @@
 package com.diro.ift2255.util;
 
 import java.util.Map;
+/**
+ * Enumération représentant des codes de statut HTTP.
+ */
 
 public class HttpStatus {
     private static final Map<Integer, String> REASONS = Map.ofEntries(

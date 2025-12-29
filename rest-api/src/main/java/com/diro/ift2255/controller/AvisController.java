@@ -5,6 +5,10 @@ import com.diro.ift2255.service.AvisService;
 import com.diro.ift2255.service.AvisService.AvisSummary;
 import com.diro.ift2255.util.ResponseUtil;
 import io.javalin.http.Context;
+/**
+ * Gère les requêtes REST liées aux avis étudiants,
+ * incluant la consultation et la soumission d’avis.
+ */
 
 public class AvisController {
 

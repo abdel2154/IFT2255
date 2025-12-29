@@ -2,6 +2,10 @@ package com.diro.ift2255.service;
 
 import com.diro.ift2255.model.Course;
 import java.util.*;
+/**
+ * Fournit des méthodes permettant de comparer
+ * des cours selon différents critères.
+ */
 
 public class ComparisonService {
     private final CourseService courseService;

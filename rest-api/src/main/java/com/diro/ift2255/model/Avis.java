@@ -1,4 +1,7 @@
 package com.diro.ift2255.model;
+/**
+ * Représente un avis étudiant sur un cours.
+ */
 
 public class Avis {
     private String courseId;   // rempli côté serveur

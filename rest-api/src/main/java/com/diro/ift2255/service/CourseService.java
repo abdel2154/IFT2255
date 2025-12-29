@@ -6,6 +6,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.net.URI;
 import java.util.*;
+/**
+ * Contient la logique métier liée à la recherche
+ * et à la consultation des cours.
+ */
 
 public class CourseService {
 

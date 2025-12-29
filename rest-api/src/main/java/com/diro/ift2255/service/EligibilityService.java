@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+/**
+ * Implémente la logique de vérification des prérequis
+ * et du cycle d’études pour un cours.
+ */
 
 public class EligibilityService {
     private final CourseService courseService;

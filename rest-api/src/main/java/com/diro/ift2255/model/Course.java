@@ -3,6 +3,9 @@ package com.diro.ift2255.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import java.util.Map;
+/**
+ * Représente un cours et ses informations principales.
+ */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {

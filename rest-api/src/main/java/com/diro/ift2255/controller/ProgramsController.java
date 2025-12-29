@@ -5,6 +5,10 @@ import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.ResponseUtil;
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * Permet la consultation des cours offerts
+ * dans un programme donné.
+ */
 
 public class ProgramsController {
     private final CourseService courseService;

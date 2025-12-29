@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+/**
+ * Fournit des endpoints REST pour la recherche
+ * et la consultation des cours.
+ */
 
 public class CourseController {
     private final CourseService service;

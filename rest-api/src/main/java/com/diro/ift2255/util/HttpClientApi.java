@@ -12,6 +12,10 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+/**
+ * Fournit des méthodes utilitaires pour effectuer
+ * des requêtes HTTP vers des API externes.
+ */
 
 public class HttpClientApi {
 

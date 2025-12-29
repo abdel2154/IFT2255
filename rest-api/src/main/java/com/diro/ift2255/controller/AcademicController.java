@@ -1,8 +1,15 @@
+
+
+
 package com.diro.ift2255.controller;
 
 import io.javalin.http.Context;
 import com.diro.ift2255.service.AcademicService;
 import com.diro.ift2255.util.ResponseUtil;
+/**
+ * Expose des endpoints REST permettant de consulter
+ * les résultats académiques agrégés d’un cours.
+ */
 
 public class AcademicController {
     private final AcademicService academicService;

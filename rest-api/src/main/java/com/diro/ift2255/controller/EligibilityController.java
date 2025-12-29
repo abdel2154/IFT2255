@@ -6,6 +6,11 @@ import com.diro.ift2255.util.ResponseUtil;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Expose des endpoints REST permettant de vérifier
+ * l’éligibilité d’un étudiant à un cours.
+ */
+
 public class EligibilityController {
     private final EligibilityService eligibilityService;
 

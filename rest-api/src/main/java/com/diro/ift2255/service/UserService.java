@@ -2,6 +2,9 @@ package com.diro.ift2255.service;
 
 import com.diro.ift2255.model.User;
 import java.util.*;
+/**
+ * Gère la logique métier associée aux utilisateurs.
+ */
 
 public class UserService {
     private final Map<Integer, User> users = new HashMap<>();

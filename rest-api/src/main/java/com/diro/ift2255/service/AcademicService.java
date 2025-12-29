@@ -8,6 +8,10 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+/**
+ * Contient la logique métier liée aux résultats
+ * académiques agrégés des cours.
+ */
 
 public class AcademicService {
     private final Map<String, AcademicStats> statsBySigle = new HashMap<>();
